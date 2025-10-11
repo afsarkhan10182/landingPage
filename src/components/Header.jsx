@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = (e) => {
     e.preventDefault();
-    const targetId = e.target.getAttribute('href');
+    const targetId = e.target.getAttribute("href");
     const targetElement = document.querySelector(targetId);
-    
+
     if (targetElement) {
-      targetElement.scrollIntoView({ 
-        behavior: 'smooth' 
+      targetElement.scrollIntoView({
+        behavior: "smooth",
       });
       setMobileMenuOpen(false);
     }
@@ -21,36 +21,42 @@ const Header = () => {
   const navLinks = [
     { href: "#hero", label: "Home" },
     { href: "#services", label: "Services" },
-    { href: "#expertise", label: "Expertise" },
     { href: "#portfolio", label: "Portfolio" },
     { href: "#process", label: "Process" },
     { href: "#team", label: "Team" },
-    { href: "#testimonials", label: "Testimonials" }
+    { href: "#testimonials", label: "Testimonials" },
   ];
 
   return (
-    <nav className="fixed w-full z-50 bg-neutral-900 text-white">
+    <nav className="fixed w-full z-50 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white backdrop-blur-xl border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0 animate__animated animate__fadeIn">
-            <span className="text-xl font-bold">Digital Fuzed</span>
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">DF</span>
+              </div>
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                Digital Fuzed
+              </span>
+            </div>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              {navLinks.map(link => (
-                <a 
-                  key={link.href} 
-                  href={link.href} 
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
                   onClick={scrollToSection}
                   className="hover:bg-neutral-700 px-3 py-2 rounded-md text-sm font-medium"
                 >
                   {link.label}
                 </a>
               ))}
-              <a 
-                href="#contact" 
+              <a
+                href="#contact"
                 onClick={scrollToSection}
                 className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium"
               >
@@ -61,17 +67,22 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button 
-              onClick={toggleMobileMenu} 
+            <button
+              onClick={toggleMobileMenu}
               className="inline-flex items-center justify-center p-2 rounded-md hover:bg-neutral-700 focus:outline-none"
             >
-              <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                <path 
-                  className="mobile-menu-icon" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth="2" 
-                  d="M4 6h16M4 12h16M4 18h16" 
+              <svg
+                className="h-6 w-6"
+                stroke="currentColor"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  className="mobile-menu-icon"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
             </button>
@@ -83,18 +94,18 @@ const Header = () => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-neutral-900">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navLinks.map(link => (
-              <a 
+            {navLinks.map((link) => (
+              <a
                 key={link.href}
-                href={link.href} 
+                href={link.href}
                 onClick={scrollToSection}
                 className="block hover:bg-neutral-700 px-3 py-2 rounded-md text-base font-medium"
               >
                 {link.label}
               </a>
             ))}
-            <a 
-              href="#contact" 
+            <a
+              href="#contact"
               onClick={scrollToSection}
               className="block bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md text-base font-medium"
             >
