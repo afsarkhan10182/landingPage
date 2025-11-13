@@ -1,5 +1,5 @@
-import React from "react";
 import { Check } from "lucide-react";
+import PropTypes from "prop-types";
 
 const ServiceCard = ({
   icon,
@@ -8,6 +8,7 @@ const ServiceCard = ({
   features,
   delay = 0,
   gradient = "from-blue-500 to-cyan-500",
+  link,
 }) => {
   return (
     <div
@@ -31,7 +32,7 @@ const ServiceCard = ({
       </h3>
       <p className="text-gray-600 mb-6 leading-relaxed">{description}</p>
 
-      <ul className="space-y-3">
+      <ul className="space-y-3 mb-6">
         {features.map((feature, index) => (
           <li
             key={index}
@@ -47,12 +48,47 @@ const ServiceCard = ({
         ))}
       </ul>
 
+      {/* Visit Link Button */}
+      {link && (
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`inline-flex items-center justify-center w-full bg-gradient-to-r ${gradient} hover:opacity-90 text-white px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg`}
+        >
+          <svg
+            className="w-4 h-4 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+            />
+          </svg>
+          View Live Demo
+        </a>
+      )}
+
       {/* Hover Effect Border */}
       <div
         className={`absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r ${gradient} group-hover:w-full transition-all duration-500`}
       ></div>
     </div>
   );
+};
+
+ServiceCard.propTypes = {
+  icon: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  features: PropTypes.arrayOf(PropTypes.string).isRequired,
+  delay: PropTypes.number,
+  gradient: PropTypes.string,
+  link: PropTypes.string,
 };
 
 const Services = () => {
@@ -84,6 +120,7 @@ const Services = () => {
       ],
       delay: 0,
       gradient: "from-blue-500 to-cyan-500",
+      link: "https://school.digitalfuzed.com",
     },
     {
       icon: (
@@ -112,6 +149,7 @@ const Services = () => {
       ],
       delay: 0.2,
       gradient: "from-purple-500 to-pink-500",
+      link: "https://hospital.digitalfuzed.com",
     },
     {
       icon: (
@@ -140,13 +178,14 @@ const Services = () => {
       ],
       delay: 0.4,
       gradient: "from-orange-500 to-red-500",
+      link: "https://realestate.digitalfuzed.com",
     },
   ];
 
   return (
     <section
       id="services"
-      className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden"
+      className="py-16 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden"
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
@@ -155,7 +194,7 @@ const Services = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16 animate__animated animate__fadeIn">
+        <div className="text-center mb-12 animate__animated animate__fadeIn">
           <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full text-sm font-medium mb-6">
             <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 animate-pulse"></span>
             Digital Solutions for Every Industry
@@ -164,13 +203,13 @@ const Services = () => {
             Stop Wasting Time & Money
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            We've seen businesses lose lakhs due to manual processes. Our
+            We&apos;ve seen businesses lose lakhs due to manual processes. Our
             systems automate everything so you can focus on growing your
             business, not managing paperwork.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid lg:grid-cols-3 gap-8 mb-12">
           {servicesData.map((service, index) => (
             <ServiceCard
               key={index}
@@ -180,6 +219,7 @@ const Services = () => {
               features={service.features}
               delay={service.delay}
               gradient={service.gradient}
+              link={service.link}
             />
           ))}
         </div>
@@ -189,7 +229,7 @@ const Services = () => {
           <div className="text-center mb-8">
             <h3 className="text-3xl font-bold mb-4">We Also Handle...</h3>
             <p className="text-gray-300 text-lg">
-              Whatever your business needs, we've got you covered:
+              Whatever your business needs, we&apos;ve got you covered:
             </p>
           </div>
 
@@ -212,7 +252,7 @@ const Services = () => {
           </div>
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-8">
           <a
             href="#contact"
             className="group relative inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"

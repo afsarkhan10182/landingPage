@@ -1,24 +1,24 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 const Testimonials = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef(null);
   const slideCount = 3;
 
-  const updateSlider = () => {
+  const updateSlider = useCallback(() => {
     if (sliderRef.current) {
       const slideWidth = sliderRef.current.clientWidth / slideCount;
       sliderRef.current.style.transform = `translateX(-${
         currentSlide * slideWidth
       }px)`;
     }
-  };
+  }, [currentSlide, slideCount]);
 
   useEffect(() => {
     updateSlider();
     window.addEventListener("resize", updateSlider);
     return () => window.removeEventListener("resize", updateSlider);
-  }, [currentSlide]);
+  }, [currentSlide, updateSlider]);
 
   const handlePrevClick = () => {
     setCurrentSlide((prev) => (prev - 1 + slideCount) % slideCount);
@@ -74,9 +74,9 @@ const Testimonials = () => {
   );
 
   return (
-    <section id="testimonials" className="py-20 bg-neutral-900 text-white">
+    <section id="testimonials" className="py-16 bg-neutral-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 animate__animated animate__fadeIn">
+        <div className="text-center mb-12 animate__animated animate__fadeIn">
           <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 rounded-full text-sm font-medium mb-6">
             <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
             Trusted by Industry Leaders

@@ -74,12 +74,6 @@ const Hero = () => {
               </p>
             </div>
 
-            <p className="text-base md:text-lg text-gray-300 max-w-2xl">
-              We&apos;ve helped 200+ businesses save 15+ hours per week and
-              reduce costs by 30%. No more Excel spreadsheets, no more lost
-              paperwork, no more manual headaches.
-            </p>
-
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="#contact"
@@ -97,7 +91,7 @@ const Hero = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-6">
+            <div className="grid grid-cols-3 gap-6">
               {[
                 {
                   value: "200+",

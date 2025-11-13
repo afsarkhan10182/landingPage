@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Linkedin, Twitter, Github } from "lucide-react";
 const Footer = () => {
   const [isVisible, setIsVisible] = useState(false);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -42,7 +42,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-20 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden"
+      className="py-16 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden"
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
@@ -51,7 +51,7 @@ const Contact = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16 animate__animated animate__fadeIn">
+        <div className="text-center mb-12 animate__animated animate__fadeIn">
           <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full text-sm font-medium mb-6">
             <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
             Ready to Transform Your Business?
@@ -60,9 +60,9 @@ const Contact = () => {
             Ready to Stop Losing Money?
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Tell us about your business problems. We'll show you exactly how
-            much time and money you can save with our systems. No sales pitch,
-            just real solutions.
+            Tell us about your business problems. We&apos;ll show you exactly
+            how much time and money you can save with our systems. No sales
+            pitch, just real solutions.
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-12 items-start">
@@ -73,8 +73,8 @@ const Contact = () => {
                 Get Your Free Business Analysis
               </h3>
               <p className="text-gray-600">
-                Tell us your current problems and we'll show you exactly how
-                much you can save with our system
+                Tell us your current problems and we&apos;ll show you exactly
+                how much you can save with our system
               </p>
             </div>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -144,7 +144,7 @@ const Contact = () => {
                   onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
-                  <option value="">What's your business type?</option>
+                  <option value="">What&apos;s your business type?</option>
                   <option value="school">School/College Management</option>
                   <option value="hospital">Hospital/Clinic Management</option>
                   <option value="construction">Construction/Real Estate</option>
@@ -215,9 +215,9 @@ const Contact = () => {
                       Visit Our Office
                     </h4>
                     <p className="text-gray-400">
-                      Plot 45, Sector 18, Gurgaon
+                      Mumbai, Maharashtra
                       <br />
-                      Haryana 122015, India
+                      India
                     </p>
                   </div>
                 </div>
@@ -263,7 +263,7 @@ const Contact = () => {
                   <div>
                     <h4 className="font-semibold text-lg mb-1">Call Us</h4>
                     <p className="text-gray-400 hover:text-blue-400 transition-colors cursor-pointer">
-                      +91 98765 43210
+                      +91 9096582181
                     </p>
                   </div>
                 </div>
