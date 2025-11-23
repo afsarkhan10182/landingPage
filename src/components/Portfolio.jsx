@@ -1,4 +1,5 @@
 import schoolErpImage from "../assets/school-erp.png";
+import restaurantImage from "../assets/restaurant.png";
 
 const Portfolio = () => {
   const projects = [
@@ -8,7 +9,7 @@ const Portfolio = () => {
         "Complete school management system with attendance, fees, and parent portal",
       image: schoolErpImage,
       link: "https://school.digitalfuzed.com",
-      technologies: ["React", "Node.js", "MongoDB"],
+      technologies: ["Nuxt.js", "Node.js", "Redis", "PostgreSQL"],
       status: "Live",
       color: "bg-blue-500",
     },
@@ -19,7 +20,7 @@ const Portfolio = () => {
       image:
         "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=300&fit=crop&crop=center",
       link: "https://hospital.digitalfuzed.com",
-      technologies: ["React", "Express", "PostgreSQL"],
+      technologies: ["Vue.js", "Laravel", "MySQL"],
       status: "Live",
       color: "bg-green-500",
     },
@@ -32,7 +33,17 @@ const Portfolio = () => {
       link: "https://realestate.digitalfuzed.com",
       technologies: ["Vue.js", "Laravel", "MySQL"],
       status: "Live",
-      color: "bg-purple-500",
+      color: "bg-indigo-500",
+    },
+    {
+      title: "Restaurant POS System",
+      description:
+        "Complete restaurant management with QR menus, table reservations, KOT, and payment integration",
+      image: restaurantImage,
+      link: "https://restaurant.digitalfuzed.com",
+      technologies: ["Vue.js", "Laravel", "MySQL"],
+      status: "Live",
+      color: "bg-green-500",
     },
   ];
 
@@ -53,23 +64,23 @@ const Portfolio = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
           {projects.map((project, index) => (
             <div
               key={project.title}
-              className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 animate__animated animate__fadeInUp"
+              className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 animate__animated animate__fadeInUp flex flex-col h-full"
               style={{
                 animationDelay: index > 0 ? `${index * 0.2}s` : undefined,
               }}
             >
               {/* Project Image */}
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-64 overflow-hidden bg-gray-100 flex items-center justify-center">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="max-w-full max-h-full w-auto h-auto object-contain group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
 
                 {/* Status Badge */}
                 <div className="absolute top-4 right-4">
@@ -82,7 +93,7 @@ const Portfolio = () => {
               </div>
 
               {/* Project Info */}
-              <div className="p-6 bg-white">
+              <div className="p-6 bg-white flex flex-col flex-grow">
                 <h3 className="text-xl font-bold mb-2 text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
                   {project.title}
                 </h3>
@@ -107,7 +118,7 @@ const Portfolio = () => {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+                  className="inline-flex items-center justify-center w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg mt-auto"
                 >
                   <svg
                     className="w-4 h-4 mr-2"

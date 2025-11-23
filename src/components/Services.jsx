@@ -12,7 +12,7 @@ const ServiceCard = ({
 }) => {
   return (
     <div
-      className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 animate__animated animate__fadeInUp border border-gray-100 hover:border-transparent overflow-hidden"
+      className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 animate__animated animate__fadeInUp border border-gray-100 hover:border-transparent overflow-hidden flex flex-col h-full"
       style={{ animationDelay: `${delay}s` }}
     >
       {/* Gradient Background on Hover */}
@@ -22,24 +22,26 @@ const ServiceCard = ({
 
       {/* Icon with Gradient */}
       <div
-        className={`relative mb-6 p-4 rounded-xl bg-gradient-to-br ${gradient} text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}
+        className={`relative mb-6 p-4 rounded-xl bg-gradient-to-br ${gradient} text-white shadow-lg group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}
       >
         {icon}
       </div>
 
-      <h3 className="text-2xl font-bold mb-4 text-gray-800 group-hover:text-gray-900 transition-colors duration-300">
+      <h3 className="text-2xl font-bold mb-4 text-gray-800 group-hover:text-gray-900 transition-colors duration-300 flex-shrink-0">
         {title}
       </h3>
-      <p className="text-gray-600 mb-6 leading-relaxed">{description}</p>
+      <p className="text-gray-600 mb-6 leading-relaxed flex-shrink-0">
+        {description}
+      </p>
 
-      <ul className="space-y-3 mb-6">
+      <ul className="space-y-3 mb-6 flex-grow">
         {features.map((feature, index) => (
           <li
             key={index}
-            className="flex items-center text-gray-700 group-hover:text-gray-800 transition-colors duration-300"
+            className="flex items-start text-gray-700 group-hover:text-gray-800 transition-colors duration-300"
           >
             <div
-              className={`w-5 h-5 mr-3 rounded-full bg-gradient-to-r ${gradient} flex items-center justify-center flex-shrink-0`}
+              className={`w-5 h-5 mr-3 rounded-full bg-gradient-to-r ${gradient} flex items-center justify-center flex-shrink-0 mt-0.5`}
             >
               <Check className="w-3 h-3 text-white" />
             </div>
@@ -54,7 +56,7 @@ const ServiceCard = ({
           href={link}
           target="_blank"
           rel="noopener noreferrer"
-          className={`inline-flex items-center justify-center w-full bg-gradient-to-r ${gradient} hover:opacity-90 text-white px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg`}
+          className={`inline-flex items-center justify-center w-full bg-gradient-to-r ${gradient} hover:opacity-90 text-white px-4 py-3 rounded-lg text-sm font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex-shrink-0 mt-auto`}
         >
           <svg
             className="w-4 h-4 mr-2"
@@ -148,7 +150,7 @@ const Services = () => {
         "Doctor schedule optimization",
       ],
       delay: 0.2,
-      gradient: "from-purple-500 to-pink-500",
+      gradient: "from-indigo-500 to-blue-500",
       link: "https://hospital.digitalfuzed.com",
     },
     {
@@ -180,6 +182,35 @@ const Services = () => {
       gradient: "from-orange-500 to-red-500",
       link: "https://realestate.digitalfuzed.com",
     },
+    {
+      icon: (
+        <svg
+          className="w-12 h-12"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+          />
+        </svg>
+      ),
+      title: "Restaurant POS System",
+      description:
+        "Manage orders, tables, and menus in one place. QR code menus, payment integration, and kitchen order tickets. Reduce wait times and increase table turnover.",
+      features: [
+        "QR code menu for contactless ordering",
+        "Table reservation & floor plan management",
+        "Payment gateway (Stripe & Razorpay)",
+        "Kitchen order tickets (KOT) system",
+      ],
+      delay: 0.6,
+      gradient: "from-green-500 to-emerald-500",
+      link: "https://restaurant.digitalfuzed.com",
+    },
   ];
 
   return (
@@ -190,12 +221,12 @@ const Services = () => {
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 right-20 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-20 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-20 w-80 h-80 bg-teal-500/5 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12 animate__animated animate__fadeIn">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full text-sm font-medium mb-6">
+          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/10 to-teal-500/10 border border-blue-500/20 rounded-full text-sm font-medium mb-6">
             <span className="w-2 h-2 bg-blue-500 rounded-full mr-2 animate-pulse"></span>
             Digital Solutions for Every Industry
           </div>
@@ -209,7 +240,7 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-12 items-stretch">
           {servicesData.map((service, index) => (
             <ServiceCard
               key={index}
@@ -235,10 +266,10 @@ const Services = () => {
 
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { name: "Restaurant POS & Billing", icon: "🍽️" },
               { name: "Gym Member Management", icon: "💪" },
               { name: "Shop Inventory Tracking", icon: "🏪" },
               { name: "Taxi Booking System", icon: "🚗" },
+              { name: "Custom Solutions", icon: "⚙️" },
             ].map((service, index) => (
               <div key={index} className="text-center group">
                 <div className="text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">
@@ -255,10 +286,10 @@ const Services = () => {
         <div className="text-center mt-8">
           <a
             href="#contact"
-            className="group relative inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
+            className="group relative inline-flex items-center bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
           >
             <span className="relative z-10">Get Your Custom Solution</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur opacity-0 group-hover:opacity-75 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-teal-600 rounded-xl blur opacity-0 group-hover:opacity-75 transition-opacity duration-300"></div>
           </a>
         </div>
       </div>

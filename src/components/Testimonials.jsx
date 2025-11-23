@@ -77,7 +77,7 @@ const Testimonials = () => {
     <section id="testimonials" className="py-16 bg-neutral-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 animate__animated animate__fadeIn">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 rounded-full text-sm font-medium mb-6">
+          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-teal-500/20 border border-blue-500/30 rounded-full text-sm font-medium mb-6">
             <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
             Trusted by Industry Leaders
           </div>
@@ -103,7 +103,7 @@ const Testimonials = () => {
                 >
                   <div className="group bg-gradient-to-br from-neutral-800 to-neutral-900 p-8 rounded-2xl h-full border border-neutral-700 hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10">
                     <div className="flex items-center mb-6">
-                      <div className="w-14 h-14 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
+                      <div className="w-14 h-14 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center shadow-lg">
                         <span className="text-xl font-bold text-white">
                           {testimonial.initial}
                         </span>

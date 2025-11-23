@@ -6,8 +6,8 @@ const Hero = () => {
     "School ERP",
     "Hospital Management",
     "Construction Management",
-    "E-commerce",
-    "CRM Systems",
+    "Restaurant POS",
+    "Custom Solutions",
   ];
 
   useEffect(() => {
@@ -20,20 +20,20 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white py-20 pt-24 overflow-hidden"
+      className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white py-20 pt-24 overflow-hidden"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500/10 rounded-full blur-2xl animate-pulse delay-500"></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-600/15 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-teal-500/10 rounded-full blur-2xl animate-pulse delay-500"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
             {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 rounded-full text-sm font-medium backdrop-blur-sm">
+            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-teal-500/20 border border-blue-500/30 rounded-full text-sm font-medium backdrop-blur-sm">
               <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
               Digital Solutions That Transform Businesses
             </div>
@@ -41,7 +41,7 @@ const Hero = () => {
             <h1 className="text-4xl md:text-6xl font-bold leading-tight">
               Stop Losing Money
               <br />
-              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">
                 on Manual Processes
               </span>
               <br />
@@ -77,10 +77,10 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="#contact"
-                className="group relative bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
+                className="group relative bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
               >
                 <span className="relative z-10">Get Your Solution</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur opacity-0 group-hover:opacity-75 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-teal-600 rounded-xl blur opacity-0 group-hover:opacity-75 transition-opacity duration-300"></div>
               </a>
               <a
                 href="#services"
@@ -101,7 +101,7 @@ const Hero = () => {
                 {
                   value: "15hrs",
                   label: "Saved Per Week",
-                  color: "text-purple-400",
+                  color: "text-teal-400",
                 },
                 {
                   value: "30%",
@@ -125,20 +125,20 @@ const Hero = () => {
 
           {/* Right Side - Interactive Demo */}
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-2xl blur-2xl opacity-30 animate-pulse"></div>
+            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 via-teal-600 to-emerald-600 rounded-2xl blur-2xl opacity-20 animate-pulse"></div>
             <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
               <div className="text-center mb-4">
                 <h3 className="text-xl font-bold mb-2">
                   Our Solutions Include:
                 </h3>
                 <div className="h-10 flex items-center justify-center">
-                  <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent animate-fade-in">
+                  <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent animate-fade-in">
                     {words[currentWord]}
                   </span>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 items-stretch">
                 {[
                   {
                     icon: (
@@ -209,25 +209,25 @@ const Hero = () => {
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth="2"
-                          d="M13 10V3L4 14h7v7l9-11h-7z"
+                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
                         />
                       </svg>
                     ),
-                    title: "Fast Delivery",
-                    desc: "Quick Solutions",
+                    title: "Restaurant POS",
+                    desc: "Order Management",
                   },
                 ].map((service) => (
                   <div
                     key={service.title}
-                    className="group bg-gradient-to-br from-slate-700/50 to-slate-800/50 hover:from-blue-500/20 hover:to-purple-500/20 p-3 rounded-lg border border-white/10 hover:border-blue-400/50 transition-all duration-300 hover:scale-105"
+                    className="group bg-gradient-to-br from-slate-800/60 to-slate-900/60 hover:from-blue-500/20 hover:to-teal-500/20 p-4 rounded-lg border border-white/10 hover:border-teal-400/50 transition-all duration-300 hover:scale-105 flex flex-col h-full"
                   >
-                    <div className="text-blue-400 group-hover:text-blue-300 mb-2 transition-colors duration-300">
+                    <div className="text-blue-400 group-hover:text-blue-300 mb-3 transition-colors duration-300 flex-shrink-0">
                       {service.icon}
                     </div>
-                    <h3 className="font-bold text-white text-sm group-hover:text-blue-300 transition-colors duration-300">
+                    <h3 className="font-bold text-white text-sm group-hover:text-blue-300 transition-colors duration-300 mb-1 flex-shrink-0">
                       {service.title}
                     </h3>
-                    <p className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                    <p className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors duration-300 flex-grow">
                       {service.desc}
                     </p>
                   </div>

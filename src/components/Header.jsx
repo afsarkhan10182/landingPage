@@ -33,10 +33,10 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0 animate__animated animate__fadeIn">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-teal-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">DF</span>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
                 Digital Fuzed
               </span>
             </div>

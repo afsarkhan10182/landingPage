@@ -30,10 +30,10 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-teal-500 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">DF</span>
               </div>
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
                 Digital Fuzed
               </h3>
             </div>
@@ -92,17 +92,21 @@ const Footer = () => {
             <h4 className="text-lg font-bold mb-4">Our Solutions</h4>
             <ul className="space-y-2">
               {[
-                "School Management System",
-                "Hospital Management System",
-                "Construction Project Manager",
-                "Restaurant POS System",
-                "Custom Business Solutions",
+                { name: "School Management System", link: "https://school.digitalfuzed.com" },
+                { name: "Hospital Management System", link: "https://hospital.digitalfuzed.com" },
+                { name: "Construction Project Manager", link: "https://realestate.digitalfuzed.com" },
+                { name: "Restaurant POS System", link: "https://restaurant.digitalfuzed.com" },
+                { name: "Custom Business Solutions", link: "#contact" },
               ].map((service) => (
-                <li
-                  key={service}
-                  className="text-gray-400 hover:text-blue-400 transition-colors cursor-pointer"
-                >
-                  {service}
+                <li key={service.name}>
+                  <a
+                    href={service.link}
+                    target={service.link.startsWith("http") ? "_blank" : "_self"}
+                    rel={service.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="text-gray-400 hover:text-blue-400 transition-colors"
+                  >
+                    {service.name}
+                  </a>
                 </li>
               ))}
             </ul>
