@@ -263,7 +263,7 @@ const Contact = () => {
                   <div>
                     <h4 className="font-semibold text-lg mb-1">Call Us</h4>
                     <p className="text-gray-400 hover:text-blue-400 transition-colors cursor-pointer">
-                      +91 9096582181
+                      +91 8459148396
                     </p>
                   </div>
                 </div>
