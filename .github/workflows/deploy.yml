@@ -18,6 +18,11 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      SSH_HOST: ${{ secrets.DEPLOY_HOST }}
+      SSH_USER: ${{ secrets.DEPLOY_USER }}
+      SSH_PORT: ${{ secrets.DEPLOY_PORT || 22 }}
+      SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
 
     steps:
       - name: Checkout code
@@ -106,27 +111,43 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
+      - name: Check deploy secrets
+        if: steps.changes.outputs.assets == 'true'
+        run: |
+          missing=0
+          [ -n "$SSH_HOST" ] || { echo "::error::Missing repository secret DEPLOY_HOST"; missing=1; }
+          [ -n "$SSH_USER" ] || { echo "::error::Missing repository secret DEPLOY_USER"; missing=1; }
+          [ -n "$SSH_KEY" ] || { echo "::error::Missing repository secret DEPLOY_SSH_KEY"; missing=1; }
+          if [ "$missing" -ne 0 ]; then
+            echo "Add these on landingPage → Settings → Secrets and variables → Actions."
+            echo "Copy the same values from the saloon repo. DEPLOY_PORT is optional (defaults to 22)."
+            exit 1
+          fi
+          echo "Deploy secrets are present. SSH port=${SSH_PORT:-22}"
+
       - name: Setup SSH
         if: steps.changes.outputs.assets == 'true'
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          printf '%s\n' "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          PORT="${{ secrets.DEPLOY_PORT }}"; PORT="${PORT:-22}"
-          ssh-keyscan -p "$PORT" -H "${{ secrets.DEPLOY_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null || true
+          PORT="${SSH_PORT:-22}"
+          ssh-keyscan -p "$PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
 
       - name: Test SSH connection
         if: steps.changes.outputs.assets == 'true'
         run: |
-          PORT="${{ secrets.DEPLOY_PORT }}"; PORT="${PORT:-22}"
+          PORT="${SSH_PORT:-22}"
+          DEST="${SSH_USER}@${SSH_HOST}"
+          echo "Connecting to ${SSH_USER}@*** port $PORT"
           for i in 1 2 3; do
             if ssh -i ~/.ssh/deploy_key \
                 -p "$PORT" \
                 -o IdentitiesOnly=yes \
                 -o StrictHostKeyChecking=no \
                 -o ConnectTimeout=20 \
-                "${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}" \
+                "$DEST" \
                 "echo 'SSH connection successful'"; then
               exit 0
             fi
@@ -140,10 +161,10 @@ jobs:
         if: steps.changes.outputs.assets == 'true'
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
-          port: ${{ secrets.DEPLOY_PORT }}
+          host: ${{ env.SSH_HOST }}
+          username: ${{ env.SSH_USER }}
+          key: ${{ env.SSH_KEY }}
+          port: ${{ env.SSH_PORT }}
           source: "frontend-assets.tar.gz"
           target: "/tmp/"
 
@@ -151,10 +172,10 @@ jobs:
         if: steps.changes.outputs.assets == 'true'
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
-          port: ${{ secrets.DEPLOY_PORT }}
+          host: ${{ env.SSH_HOST }}
+          username: ${{ env.SSH_USER }}
+          key: ${{ env.SSH_KEY }}
+          port: ${{ env.SSH_PORT }}
           script: |
             set -e
             APP_DIR="${{ env.DEPLOY_PATH }}"
@@ -174,7 +195,7 @@ jobs:
 
             find "$APP_DIR" -type d -exec chmod 755 {} +
             find "$APP_DIR" -type f -exec chmod 644 {} +
-            chown -R ${{ secrets.DEPLOY_USER }}:${{ secrets.DEPLOY_USER }} "$APP_DIR" || true
+            chown -R ${{ env.SSH_USER }}:${{ env.SSH_USER }} "$APP_DIR" || true
 
             rm -rf "$RELEASE"
             echo "Landing page files updated in $APP_DIR"
@@ -183,10 +204,10 @@ jobs:
         if: steps.changes.outputs.assets == 'true'
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
-          port: ${{ secrets.DEPLOY_PORT }}
+          host: ${{ env.SSH_HOST }}
+          username: ${{ env.SSH_USER }}
+          key: ${{ env.SSH_KEY }}
+          port: ${{ env.SSH_PORT }}
           script: |
             set -e
             cd "${{ env.DEPLOY_PATH }}"
