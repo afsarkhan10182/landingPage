@@ -36,7 +36,7 @@ export const liveProducts = [
     id: "restaurant",
     name: "Restaurant POS",
     host: "restaurant.digitalfuzed.com",
-    url: "https://restaurant.digitalfuzed.com",
+    url: "https://restaurant.digitalfuzed.com/login",
     group: "property-hospitality",
     description: "QR menus, tables, KOT, and payments in one counter.",
     icon: "UtensilsCrossed",
