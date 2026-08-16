@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Linkedin, Twitter, Github } from "lucide-react";
+import { liveProducts } from "../data/liveProducts";
 const Footer = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -71,7 +72,7 @@ const Footer = () => {
               {[
                 { href: "#hero", label: "Home" },
                 { href: "#services", label: "Services" },
-                { href: "#portfolio", label: "Portfolio" },
+                { href: "#portfolio", label: "Live Products" },
                 { href: "#team", label: "Team" },
                 { href: "#contact", label: "Contact" },
               ].map((link) => (
@@ -87,25 +88,19 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Solutions */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Our Solutions</h4>
+            <h4 className="mb-4 text-lg font-bold">Live Products</h4>
             <ul className="space-y-2">
-              {[
-                { name: "School Management System", link: "https://school.digitalfuzed.com" },
-                { name: "Hospital Management System", link: "https://hospital.digitalfuzed.com" },
-                { name: "Construction Project Manager", link: "https://realestate.digitalfuzed.com" },
-                { name: "Restaurant POS System", link: "https://restaurant.digitalfuzed.com" },
-                { name: "Custom Business Solutions", link: "#contact" },
-              ].map((service) => (
-                <li key={service.name}>
+              {liveProducts.map((product) => (
+                <li key={product.id}>
                   <a
-                    href={service.link}
-                    target={service.link.startsWith("http") ? "_blank" : "_self"}
-                    rel={service.link.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="text-gray-400 hover:text-blue-400 transition-colors"
+                    href={product.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 transition-colors hover:text-blue-400"
                   >
-                    {service.name}
+                    {product.name}
                   </a>
                 </li>
               ))}

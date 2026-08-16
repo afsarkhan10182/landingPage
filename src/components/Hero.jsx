@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
+import {
+  liveProducts,
+  productGroups,
+  productsByGroup,
+} from "../data/liveProducts";
 
 const Hero = () => {
   const [currentWord, setCurrentWord] = useState(0);
-  const words = [
-    "School ERP",
-    "Hospital Management",
-    "Construction Management",
-    "Restaurant POS",
-    "Custom Solutions",
-  ];
+  const words = liveProducts.map((product) => product.name);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,77 +19,73 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white py-20 pt-24 overflow-hidden"
+      className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 py-20 pt-24 text-white"
     >
-      {/* Animated Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-600/15 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-teal-500/10 rounded-full blur-2xl animate-pulse delay-500"></div>
+        <div className="absolute left-10 top-20 h-72 w-72 animate-pulse rounded-full bg-blue-600/15 blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 h-96 w-96 animate-pulse rounded-full bg-emerald-500/15 blur-3xl delay-1000"></div>
+        <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 transform animate-pulse rounded-full bg-teal-500/10 blur-2xl delay-500"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="space-y-8">
-            {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-teal-500/20 border border-blue-500/30 rounded-full text-sm font-medium backdrop-blur-sm">
-              <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-              Digital Solutions That Transform Businesses
+            <div className="inline-flex items-center rounded-full border border-blue-500/30 bg-gradient-to-r from-blue-500/20 to-teal-500/20 px-4 py-2 text-sm font-medium backdrop-blur-sm">
+              <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-400"></span>
+              {liveProducts.length} live products you can open now
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+            <h1 className="text-4xl font-bold leading-tight md:text-6xl">
               Stop Losing Money
               <br />
               <span className="bg-gradient-to-r from-blue-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">
                 on Manual Processes
               </span>
               <br />
-              <span className="text-3xl md:text-4xl text-gray-300">
+              <span className="text-3xl text-gray-300 md:text-4xl">
                 We Fix That
               </span>
             </h1>
 
-            <div className="text-lg md:text-xl text-gray-300 space-y-1">
+            <div className="space-y-1 text-lg text-gray-300 md:text-xl">
               <p>
                 Your school still using{" "}
-                <span className="text-red-400 font-semibold">
+                <span className="font-semibold text-red-400">
                   paper attendance sheets
                 </span>
                 ?
               </p>
               <p>
                 Hospital{" "}
-                <span className="text-red-400 font-semibold">
+                <span className="font-semibold text-red-400">
                   billing taking forever
                 </span>
                 ?
               </p>
               <p>
                 Construction projects{" "}
-                <span className="text-red-400 font-semibold">
+                <span className="font-semibold text-red-400">
                   going over budget
                 </span>
                 ?
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col gap-4 sm:flex-row">
               <a
                 href="#contact"
-                className="group relative bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
+                className="group relative transform rounded-xl bg-gradient-to-r from-blue-600 to-teal-600 px-8 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-teal-700 hover:shadow-2xl hover:shadow-blue-500/25"
               >
                 <span className="relative z-10">Get Your Solution</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-teal-600 rounded-xl blur opacity-0 group-hover:opacity-75 transition-opacity duration-300"></div>
               </a>
               <a
-                href="#services"
-                className="group border-2 border-white/20 hover:border-blue-400 hover:bg-blue-400/10 px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300 backdrop-blur-sm"
+                href="#portfolio"
+                className="group rounded-xl border-2 border-white/20 px-8 py-4 text-lg font-semibold backdrop-blur-sm transition-all duration-300 hover:border-blue-400 hover:bg-blue-400/10"
               >
-                Explore Solutions
+                See live products
               </a>
             </div>
 
-            {/* Stats */}
             <div className="grid grid-cols-3 gap-6">
               {[
                 {
@@ -109,13 +104,13 @@ const Hero = () => {
                   color: "text-cyan-400",
                 },
               ].map((stat) => (
-                <div key={stat.label} className="text-center group">
+                <div key={stat.label} className="group text-center">
                   <h3
-                    className={`text-3xl font-bold ${stat.color} group-hover:scale-110 transition-transform duration-300`}
+                    className={`text-3xl font-bold ${stat.color} transition-transform duration-300 group-hover:scale-110`}
                   >
                     {stat.value}
                   </h3>
-                  <p className="text-gray-400 text-sm font-medium">
+                  <p className="text-sm font-medium text-gray-400">
                     {stat.label}
                   </p>
                 </div>
@@ -123,113 +118,42 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right Side - Interactive Demo */}
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 via-teal-600 to-emerald-600 rounded-2xl blur-2xl opacity-20 animate-pulse"></div>
-            <div className="relative bg-gradient-to-br from-slate-800/50 to-slate-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
-              <div className="text-center mb-4">
-                <h3 className="text-xl font-bold mb-2">
-                  Our Solutions Include:
-                </h3>
-                <div className="h-10 flex items-center justify-center">
-                  <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent animate-fade-in">
+            <div className="absolute -inset-4 animate-pulse rounded-2xl bg-gradient-to-r from-blue-600 via-teal-600 to-emerald-600 opacity-20 blur-2xl"></div>
+            <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-6 shadow-2xl backdrop-blur-xl">
+              <div className="mb-5 text-center">
+                <h3 className="mb-2 text-xl font-bold">Live products</h3>
+                <div className="flex h-10 items-center justify-center">
+                  <span className="animate-fade-in bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-2xl font-bold text-transparent">
                     {words[currentWord]}
                   </span>
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 items-stretch">
-                {[
-                  {
-                    icon: (
-                      <svg
-                        className="w-10 h-10"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                        />
-                      </svg>
-                    ),
-                    title: "School ERP",
-                    desc: "Complete Management",
-                  },
-                  {
-                    icon: (
-                      <svg
-                        className="w-10 h-10"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                        />
-                      </svg>
-                    ),
-                    title: "Hospital",
-                    desc: "Management System",
-                  },
-                  {
-                    icon: (
-                      <svg
-                        className="w-10 h-10"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                        />
-                      </svg>
-                    ),
-                    title: "Construction",
-                    desc: "Project Management",
-                  },
-                  {
-                    icon: (
-                      <svg
-                        className="w-10 h-10"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                        />
-                      </svg>
-                    ),
-                    title: "Restaurant POS",
-                    desc: "Order Management",
-                  },
-                ].map((service) => (
-                  <div
-                    key={service.title}
-                    className="group bg-gradient-to-br from-slate-800/60 to-slate-900/60 hover:from-blue-500/20 hover:to-teal-500/20 p-4 rounded-lg border border-white/10 hover:border-teal-400/50 transition-all duration-300 hover:scale-105 flex flex-col h-full"
-                  >
-                    <div className="text-blue-400 group-hover:text-blue-300 mb-3 transition-colors duration-300 flex-shrink-0">
-                      {service.icon}
-                    </div>
-                    <h3 className="font-bold text-white text-sm group-hover:text-blue-300 transition-colors duration-300 mb-1 flex-shrink-0">
-                      {service.title}
-                    </h3>
-                    <p className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors duration-300 flex-grow">
-                      {service.desc}
+              <div className="space-y-4">
+                {productGroups.map((group) => (
+                  <div key={group.id}>
+                    <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                      {group.title}
                     </p>
+                    <div className="space-y-2">
+                      {productsByGroup(group.id).map((product) => (
+                        <a
+                          key={product.id}
+                          href={product.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-between rounded-lg border border-white/10 bg-slate-800/60 px-3 py-2 transition hover:border-teal-400/50 hover:bg-teal-500/10"
+                        >
+                          <span className="text-sm font-semibold text-white">
+                            {product.name}
+                          </span>
+                          <span className="hidden font-mono text-[11px] text-slate-400 sm:inline">
+                            {product.host}
+                          </span>
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>
