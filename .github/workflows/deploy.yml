@@ -6,15 +6,6 @@ on:
       - digitalfuzed-landing-page
   workflow_dispatch:
 
-# Never let two deploys modify production at the same time. A running deploy
-# finishes; newer pushes wait and then deploy the latest queued revision.
-concurrency:
-  group: deploy-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false
-
-env:
-  DEPLOY_PATH: /home/digitalfuzed/htdocs/digitalfuzed.com
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -23,232 +14,37 @@ jobs:
       SSH_USER: ${{ secrets.DEPLOY_USER }}
       SSH_PORT: ${{ secrets.DEPLOY_PORT || 22 }}
       SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+      DEPLOY_PATH: /home/digitalfuzed/htdocs/digitalfuzed.com
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Check previous workflow run status
-        id: previous_run
-        run: |
-          PREVIOUS_RUN=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/actions/runs?branch=${{ github.ref_name }}&per_page=2" | \
-            jq -r '.workflow_runs[1].conclusion // "null"')
-
-          if [ "$PREVIOUS_RUN" = "failure" ] || [ "$PREVIOUS_RUN" = "cancelled" ]; then
-            echo "failed=true" >> $GITHUB_OUTPUT
-            echo "Previous run did not succeed — forcing a full deploy."
-          else
-            echo "failed=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Detect what changed
-        id: changes
-        run: |
-          FORCE=false
-
-          # Force everything on manual runs, first push, recovery after a failed run,
-          # or when the workflow itself changed.
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || \
-             [ "${{ steps.previous_run.outputs.failed }}" = "true" ] || \
-             [ -z "${{ github.event.before }}" ] || \
-             [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ]; then
-            FORCE=true
-          fi
-
-          if [ "$FORCE" = "false" ]; then
-            CHANGED=$(git diff --name-only "${{ github.event.before }}" "${{ github.sha }}")
-            echo "Changed files:"
-            echo "$CHANGED"
-
-            echo "$CHANGED" | grep -qE '^\.github/workflows/' && FORCE=true
-          fi
-
-          if [ "$FORCE" = "true" ]; then
-            echo "assets=true" >> $GITHUB_OUTPUT
-            echo "Full deploy: building Vite production assets."
-            exit 0
-          fi
-
-          if echo "$CHANGED" | grep -qE '^(src/|public/|index\.html$|package(-lock)?\.json$|vite\.config\.js$|tailwind\.config\.js$|postcss\.config\.js$)'; then
-            echo "assets=true" >> $GITHUB_OUTPUT
-          else
-            echo "assets=false" >> $GITHUB_OUTPUT
-            echo "No site files changed — skipping deploy."
-          fi
-
-      - name: Summarise deploy plan
-        run: |
-          echo "assets      = ${{ steps.changes.outputs.assets }}"
-          echo "deploy path = ${{ env.DEPLOY_PATH }}"
 
       - name: Setup Node.js
-        if: steps.changes.outputs.assets == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      - name: Build frontend assets
-        if: steps.changes.outputs.assets == 'true'
+      - name: Build
         run: |
           npm ci
           npm run build
 
-          test -s dist/index.html
-          test -d dist/assets
-
-          tar -czf frontend-assets.tar.gz -C dist .
-
-      - name: Keep frontend-assets.tar.gz artifact
-        if: steps.changes.outputs.assets == 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: frontend-assets
-          path: frontend-assets.tar.gz
-          if-no-files-found: error
-          retention-days: 90
-
-      - name: Check deploy secrets
-        if: steps.changes.outputs.assets == 'true'
-        run: |
-          missing=0
-          [ -n "$SSH_HOST" ] || { echo "::error::Missing repository secret DEPLOY_HOST"; missing=1; }
-          [ -n "$SSH_USER" ] || { echo "::error::Missing repository secret DEPLOY_USER"; missing=1; }
-          [ -n "$SSH_KEY" ] || { echo "::error::Missing repository secret DEPLOY_SSH_KEY"; missing=1; }
-          if [ "$missing" -ne 0 ]; then
-            echo "Add these on landingPage → Settings → Secrets and variables → Actions."
-            echo "Use the digitalfuzed server account, not another project's keys. DEPLOY_PORT is optional (defaults to 22)."
-            exit 1
-          fi
-          echo "Deploy secrets are present. SSH port=${SSH_PORT:-22}"
-
       - name: Setup SSH
-        if: steps.changes.outputs.assets == 'true'
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          KEY_FILE="$HOME/.ssh/deploy_key"
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
 
-          # Secrets often arrive with CRLF or literal \n instead of real newlines.
-          printf '%s\n' "$SSH_KEY" | tr -d '\r' > "$KEY_FILE"
-          if [ "$(grep -c '^' "$KEY_FILE")" -le 2 ]; then
-            sed -i 's/\\n/\n/g' "$KEY_FILE"
-          fi
-          chmod 600 "$KEY_FILE"
-
-          if ! grep -qE '^-----BEGIN (OPENSSH |RSA |EC )?PRIVATE KEY-----$' "$KEY_FILE"; then
-            echo "::error::DEPLOY_SSH_KEY must be the private key block (BEGIN ... PRIVATE KEY), not the .pub file."
-            exit 1
-          fi
-          if ! ssh-keygen -y -f "$KEY_FILE" >/dev/null 2>&1; then
-            echo "::error::DEPLOY_SSH_KEY does not parse. Re-paste the private key with real line breaks (not one line, not quoted)."
-            exit 1
-          fi
-          echo "Private key parses OK. Fingerprint:"
-          ssh-keygen -lf "$KEY_FILE"
-
-          PORT="${SSH_PORT:-22}"
-          ssh-keyscan -p "$PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
-
-      - name: Test SSH connection
-        if: steps.changes.outputs.assets == 'true'
+      - name: Deploy dist
         run: |
           PORT="${SSH_PORT:-22}"
           DEST="${SSH_USER}@${SSH_HOST}"
-          echo "Connecting to ${SSH_USER}@*** port $PORT"
-          for i in 1 2 3; do
-            if ssh -i ~/.ssh/deploy_key \
-                -p "$PORT" \
-                -o IdentitiesOnly=yes \
-                -o BatchMode=yes \
-                -o PreferredAuthentications=publickey \
-                -o StrictHostKeyChecking=no \
-                -o ConnectTimeout=20 \
-                "$DEST" \
-                "echo 'SSH connection successful'"; then
-              exit 0
-            fi
-            echo "SSH attempt $i failed; retrying in 10s..."
-            sleep 10
-          done
-          echo "SSH connection failed after retries"
-          echo "::error::Server rejected the key. Add this key's .pub line to ~${SSH_USER}/.ssh/authorized_keys on the host, and confirm DEPLOY_HOST / DEPLOY_USER / DEPLOY_PORT match that account."
-          exit 1
-
-
-      - name: Upload built assets
-        if: steps.changes.outputs.assets == 'true'
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ env.SSH_HOST }}
-          username: ${{ env.SSH_USER }}
-          key: ${{ env.SSH_KEY }}
-          port: ${{ env.SSH_PORT }}
-          source: "frontend-assets.tar.gz"
-          target: "/tmp/"
-
-      - name: Extract built assets
-        if: steps.changes.outputs.assets == 'true'
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ env.SSH_HOST }}
-          username: ${{ env.SSH_USER }}
-          key: ${{ env.SSH_KEY }}
-          port: ${{ env.SSH_PORT }}
-          script: |
-            set -e
-            APP_DIR="${{ env.DEPLOY_PATH }}"
-            RELEASE="/tmp/landing-release-$$"
-
-            test -f /tmp/frontend-assets.tar.gz
-            mkdir -p "$RELEASE" "$APP_DIR"
-            tar -xzf /tmp/frontend-assets.tar.gz -C "$RELEASE"
-            test -s "$RELEASE/index.html"
-
-            if [ -d "$APP_DIR/.well-known" ]; then
-              cp -a "$APP_DIR/.well-known" "$RELEASE/.well-known"
-            fi
-
-            find "$APP_DIR" -mindepth 1 -maxdepth 1 ! -name '.well-known' -exec rm -rf {} +
-            cp -a "$RELEASE"/. "$APP_DIR"/
-
-            find "$APP_DIR" -type d -exec chmod 755 {} +
-            find "$APP_DIR" -type f -exec chmod 644 {} +
-            chown -R ${{ env.SSH_USER }}:${{ env.SSH_USER }} "$APP_DIR" || true
-
-            rm -rf "$RELEASE"
-            echo "Landing page files updated in $APP_DIR"
-
-      - name: Verify deploy
-        if: steps.changes.outputs.assets == 'true'
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ env.SSH_HOST }}
-          username: ${{ env.SSH_USER }}
-          key: ${{ env.SSH_KEY }}
-          port: ${{ env.SSH_PORT }}
-          script: |
-            set -e
-            cd "${{ env.DEPLOY_PATH }}"
-            if [ ! -s index.html ]; then
-              echo "WARNING: index.html is missing after deploy."
-              exit 1
-            fi
-            if [ ! -d assets ]; then
-              echo "WARNING: assets/ is missing after deploy."
-              exit 1
-            fi
-            echo "Deploy verified."
-
-      - name: Deployment success
-        if: success()
-        run: echo "Application deployed successfully!"
-
-      - name: Deployment failure
-        if: failure()
-        run: |
-          echo "Deployment failed!"
-          exit 1
+          KEY="$HOME/.ssh/deploy_key"
+          scp -i "$KEY" -P "$PORT" \
+            -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=no \
+            -r dist/. \
+            "$DEST:${DEPLOY_PATH}/"
