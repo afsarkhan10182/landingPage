@@ -120,7 +120,7 @@ jobs:
           [ -n "$SSH_KEY" ] || { echo "::error::Missing repository secret DEPLOY_SSH_KEY"; missing=1; }
           if [ "$missing" -ne 0 ]; then
             echo "Add these on landingPage → Settings → Secrets and variables → Actions."
-            echo "Copy the same values from the saloon repo. DEPLOY_PORT is optional (defaults to 22)."
+            echo "Use the digitalfuzed server account, not another project's keys. DEPLOY_PORT is optional (defaults to 22)."
             exit 1
           fi
           echo "Deploy secrets are present. SSH port=${SSH_PORT:-22}"
@@ -130,8 +130,26 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
+          KEY_FILE="$HOME/.ssh/deploy_key"
+
+          # Secrets often arrive with CRLF or literal \n instead of real newlines.
+          printf '%s\n' "$SSH_KEY" | tr -d '\r' > "$KEY_FILE"
+          if [ "$(grep -c '^' "$KEY_FILE")" -le 2 ]; then
+            sed -i 's/\\n/\n/g' "$KEY_FILE"
+          fi
+          chmod 600 "$KEY_FILE"
+
+          if ! grep -qE '^-----BEGIN (OPENSSH |RSA |EC )?PRIVATE KEY-----$' "$KEY_FILE"; then
+            echo "::error::DEPLOY_SSH_KEY must be the private key block (BEGIN ... PRIVATE KEY), not the .pub file."
+            exit 1
+          fi
+          if ! ssh-keygen -y -f "$KEY_FILE" >/dev/null 2>&1; then
+            echo "::error::DEPLOY_SSH_KEY does not parse. Re-paste the private key with real line breaks (not one line, not quoted)."
+            exit 1
+          fi
+          echo "Private key parses OK. Fingerprint:"
+          ssh-keygen -lf "$KEY_FILE"
+
           PORT="${SSH_PORT:-22}"
           ssh-keyscan -p "$PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
 
@@ -145,6 +163,8 @@ jobs:
             if ssh -i ~/.ssh/deploy_key \
                 -p "$PORT" \
                 -o IdentitiesOnly=yes \
+                -o BatchMode=yes \
+                -o PreferredAuthentications=publickey \
                 -o StrictHostKeyChecking=no \
                 -o ConnectTimeout=20 \
                 "$DEST" \
@@ -155,7 +175,9 @@ jobs:
             sleep 10
           done
           echo "SSH connection failed after retries"
+          echo "::error::Server rejected the key. Add this key's .pub line to ~${SSH_USER}/.ssh/authorized_keys on the host, and confirm DEPLOY_HOST / DEPLOY_USER / DEPLOY_PORT match that account."
           exit 1
+
 
       - name: Upload built assets
         if: steps.changes.outputs.assets == 'true'
