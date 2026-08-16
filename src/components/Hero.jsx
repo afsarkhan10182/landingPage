@@ -49,21 +49,21 @@ const Hero = () => {
 
             <div className="space-y-1 text-lg text-gray-300 md:text-xl">
               <p>
-                Your school still using{" "}
+                Is your school still using{" "}
                 <span className="font-semibold text-red-400">
                   paper attendance sheets
                 </span>
                 ?
               </p>
               <p>
-                Hospital{" "}
+                Is your clinic&apos;s{" "}
                 <span className="font-semibold text-red-400">
                   billing taking forever
                 </span>
                 ?
               </p>
               <p>
-                Construction projects{" "}
+                Are construction projects{" "}
                 <span className="font-semibold text-red-400">
                   going over budget
                 </span>
@@ -74,13 +74,13 @@ const Hero = () => {
             <div className="flex flex-col gap-4 sm:flex-row">
               <a
                 href="#contact"
-                className="group relative transform rounded-xl bg-gradient-to-r from-blue-600 to-teal-600 px-8 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-teal-700 hover:shadow-2xl hover:shadow-blue-500/25"
+                className="group relative transform rounded-xl bg-gradient-to-r from-blue-600 to-teal-600 px-8 py-4 text-center text-lg font-semibold transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-teal-700 hover:shadow-2xl hover:shadow-blue-500/25"
               >
-                <span className="relative z-10">Get Your Solution</span>
+                Get Your Solution
               </a>
               <a
                 href="#portfolio"
-                className="group rounded-xl border-2 border-white/20 px-8 py-4 text-lg font-semibold backdrop-blur-sm transition-all duration-300 hover:border-blue-400 hover:bg-blue-400/10"
+                className="rounded-xl border-2 border-white/20 px-8 py-4 text-center text-lg font-semibold backdrop-blur-sm transition-all duration-300 hover:border-blue-400 hover:bg-blue-400/10"
               >
                 See live products
               </a>
@@ -105,11 +105,11 @@ const Hero = () => {
                 },
               ].map((stat) => (
                 <div key={stat.label} className="group text-center">
-                  <h3
+                  <p
                     className={`text-3xl font-bold ${stat.color} transition-transform duration-300 group-hover:scale-110`}
                   >
                     {stat.value}
-                  </h3>
+                  </p>
                   <p className="text-sm font-medium text-gray-400">
                     {stat.label}
                   </p>
@@ -124,7 +124,10 @@ const Hero = () => {
               <div className="mb-5 text-center">
                 <h3 className="mb-2 text-xl font-bold">Live products</h3>
                 <div className="flex h-10 items-center justify-center">
-                  <span className="animate-fade-in bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-2xl font-bold text-transparent">
+                  <span
+                    key={words[currentWord]}
+                    className="animate-fade-in bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-2xl font-bold text-transparent"
+                  >
                     {words[currentWord]}
                   </span>
                 </div>

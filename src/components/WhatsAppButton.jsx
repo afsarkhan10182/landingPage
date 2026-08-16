@@ -10,15 +10,11 @@ const WhatsAppButton = () => {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 group"
+      className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-4 z-50 group sm:right-6"
       aria-label="Chat with us on WhatsApp"
     >
       <div className="relative">
-        {/* Pulse animation ring */}
-        <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-75"></div>
-
-        {/* Main button */}
-        <div className="relative bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transform transition-all duration-300 hover:scale-110 group-hover:shadow-green-500/50">
+        <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-green-500 to-green-600 shadow-lg transition hover:from-green-600 hover:to-green-700">
           <svg
             className="w-8 h-8 text-white"
             fill="currentColor"
@@ -30,7 +26,7 @@ const WhatsAppButton = () => {
         </div>
 
         {/* Tooltip on hover */}
-        <div className="absolute right-16 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-sm px-3 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+        <div className="pointer-events-none absolute right-16 top-1/2 hidden -translate-y-1/2 whitespace-nowrap rounded-lg bg-gray-900 px-3 py-2 text-sm text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:block">
           Chat with us on WhatsApp
           <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-2 h-2 bg-gray-900 rotate-45"></div>
         </div>

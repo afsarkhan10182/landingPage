@@ -30,9 +30,9 @@ const ProductCard = ({ product }) => {
       href={product.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
+          className={`group flex h-full flex-col rounded-2xl border p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg ${product.surface}`}
     >
-      <div className="mb-4 flex items-start justify-between gap-3">
+      <div className="mb-3 flex items-start justify-between gap-3">
         <div
           className={`flex h-11 w-11 items-center justify-center rounded-xl ${product.iconWrap}`}
         >
@@ -49,11 +49,11 @@ const ProductCard = ({ product }) => {
         {product.name}
       </h3>
       <p className="mt-1 font-mono text-xs text-gray-500">{product.host}</p>
-      <p className="mt-3 flex-grow text-sm leading-relaxed text-gray-600">
+      <p className="mt-2 flex-grow text-sm leading-relaxed text-gray-600">
         {product.description}
       </p>
 
-      <span className="mt-5 inline-flex items-center text-sm font-semibold text-blue-600 group-hover:text-blue-800">
+      <span className="mt-3 inline-flex min-h-10 items-center justify-center rounded-lg bg-gradient-to-r from-blue-600 to-teal-600 px-3 text-sm font-semibold text-white group-hover:from-blue-700 group-hover:to-teal-700">
         Open live demo
         <svg
           className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5"
@@ -83,31 +83,32 @@ ProductCard.propTypes = {
     icon: PropTypes.string.isRequired,
     accent: PropTypes.string.isRequired,
     iconWrap: PropTypes.string.isRequired,
+    surface: PropTypes.string.isRequired,
   }).isRequired,
 };
 
 const Portfolio = () => {
   return (
-    <section id="portfolio" className="bg-slate-50 py-16">
+    <section id="portfolio" className="bg-slate-100 pb-10 pt-6 sm:pb-12 sm:pt-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <div className="mb-6 inline-flex items-center rounded-full border border-green-500/20 bg-gradient-to-r from-green-500/10 to-blue-500/10 px-4 py-2 text-sm font-medium">
+        <div className="mb-5 text-center">
+          <div className="mb-2 inline-flex items-center rounded-full border border-green-500/20 bg-gradient-to-r from-green-500/10 to-blue-500/10 px-3 py-1.5 text-sm font-medium">
             <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-500"></span>
             {liveProducts.length} live products
           </div>
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+          <h2 className="mb-1 text-3xl font-bold md:text-4xl">
             Open a working product
           </h2>
-          <p className="mx-auto max-w-2xl text-gray-600">
+          <p className="mx-auto max-w-2xl text-sm text-gray-600">
             Every item below is already running. Grouped by what it is for, so
             you can pick a demo in a few seconds.
           </p>
         </div>
 
-        <div className="space-y-12">
+        <div className="space-y-8">
           {productGroups.map((group) => (
             <div key={group.id}>
-              <div className="mb-5 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+              <div className="mb-3 flex flex-col gap-0.5 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <h3 className="text-xl font-bold text-gray-900">
                     {group.title}
@@ -119,7 +120,7 @@ const Portfolio = () => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
                 {productsByGroup(group.id).map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
@@ -128,7 +129,7 @@ const Portfolio = () => {
           ))}
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-8 text-center">
           <a
             href="#contact"
             className="inline-block rounded-md bg-blue-600 px-8 py-3 text-white transition duration-300 hover:scale-105 hover:bg-blue-700"

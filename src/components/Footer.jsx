@@ -25,7 +25,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-neutral-900 text-white pt-16 pb-8">
+    <footer className="bg-neutral-900 pb-24 pt-16 text-white sm:pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8 pb-12 border-b border-neutral-800">
           {/* Company Info */}
@@ -39,9 +39,8 @@ const Footer = () => {
               </h3>
             </div>
             <p className="text-gray-400">
-              We help Indian businesses stop losing money on manual processes.
-              From schools to hospitals to construction companies - we automate
-              everything so you can focus on growing your business.
+              Software for Indian schools, clinics, shops, and offices. Built in
+              Mumbai, running live today.
             </p>
             <div className="flex space-x-4">
               <a
@@ -67,8 +66,8 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
+            <h4 className="mb-3 text-lg font-bold">Quick Links</h4>
+            <ul className="space-y-0.5">
               {[
                 { href: "#hero", label: "Home" },
                 { href: "#services", label: "Services" },
@@ -79,7 +78,7 @@ const Footer = () => {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-gray-400 hover:text-white transition-colors"
+                    className="inline-block py-0.5 text-gray-400 transition-colors hover:text-white"
                   >
                     {link.label}
                   </a>
@@ -90,15 +89,15 @@ const Footer = () => {
 
           {/* Solutions */}
           <div>
-            <h4 className="mb-4 text-lg font-bold">Live Products</h4>
-            <ul className="space-y-2">
+            <h4 className="mb-3 text-lg font-bold">Live Products</h4>
+            <ul className="space-y-0.5">
               {liveProducts.map((product) => (
                 <li key={product.id}>
                   <a
                     href={product.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-400 transition-colors hover:text-blue-400"
+                    className="inline-block py-0.5 text-gray-400 transition-colors hover:text-blue-400"
                   >
                     {product.name}
                   </a>
@@ -117,7 +116,7 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Your email address"
-                className="w-full px-4 py-2 bg-neutral-800 border border-neutral-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                className="w-full min-h-12 rounded-md border border-neutral-700 bg-neutral-800 px-4 py-3 text-base text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
               <button
@@ -134,7 +133,7 @@ const Footer = () => {
         <div className="pt-8">
           <div className="grid md:grid-cols-2 gap-4 items-center">
             <p className="text-gray-400 text-sm text-center md:text-left">
-              © 2024 Digital Fuzed. All rights reserved.
+              © 2026 Digital Fuzed. All rights reserved.
             </p>
             <div className="flex justify-center md:justify-end space-x-6">
               {["Privacy Policy", "Terms of Service", "Cookie Policy"].map(
@@ -156,8 +155,10 @@ const Footer = () => {
       {/* Scroll to Top Button */}
       {isVisible && (
         <button
+          type="button"
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors focus:outline-none"
+          aria-label="Back to top"
+          className="fixed bottom-[max(5.5rem,calc(env(safe-area-inset-bottom)+4.5rem))] right-4 z-40 rounded-full bg-blue-600 p-3 text-white shadow-lg hover:bg-blue-700 sm:right-6"
         >
           <svg
             className="w-6 h-6"

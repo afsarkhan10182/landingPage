@@ -12,6 +12,9 @@ import WhatsAppButton from "./components/WhatsAppButton";
 function App() {
   return (
     <div className="App">
+      <a href="#hero" className="skip-link">
+        Skip to content
+      </a>
       <Header />
       <Hero />
       <Services />

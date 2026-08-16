@@ -8,7 +8,8 @@ export const liveProducts = [
     description: "Attendance, fees, report cards, and a parent portal.",
     icon: "GraduationCap",
     accent: "bg-blue-500",
-    iconWrap: "bg-blue-50 text-blue-600",
+    iconWrap: "bg-blue-100 text-blue-700",
+    surface: "border-blue-200 bg-blue-50",
   },
   {
     id: "hospital",
@@ -19,7 +20,8 @@ export const liveProducts = [
     description: "Patient queues, appointments, billing, and pharmacy stock.",
     icon: "HeartPulse",
     accent: "bg-rose-500",
-    iconWrap: "bg-rose-50 text-rose-600",
+    iconWrap: "bg-rose-100 text-rose-700",
+    surface: "border-rose-200 bg-rose-50",
   },
   {
     id: "realestate",
@@ -30,7 +32,8 @@ export const liveProducts = [
     description: "Properties, leads, site progress, and client follow-ups.",
     icon: "Building2",
     accent: "bg-amber-500",
-    iconWrap: "bg-amber-50 text-amber-700",
+    iconWrap: "bg-amber-100 text-amber-800",
+    surface: "border-amber-200 bg-amber-50",
   },
   {
     id: "restaurant",
@@ -41,7 +44,8 @@ export const liveProducts = [
     description: "QR menus, tables, KOT, and payments in one counter.",
     icon: "UtensilsCrossed",
     accent: "bg-emerald-500",
-    iconWrap: "bg-emerald-50 text-emerald-700",
+    iconWrap: "bg-emerald-100 text-emerald-800",
+    surface: "border-emerald-200 bg-emerald-50",
   },
   {
     id: "salon",
@@ -52,7 +56,8 @@ export const liveProducts = [
     description: "Bookings, staff, services, and salon billing.",
     icon: "Scissors",
     accent: "bg-fuchsia-500",
-    iconWrap: "bg-fuchsia-50 text-fuchsia-700",
+    iconWrap: "bg-fuchsia-100 text-fuchsia-800",
+    surface: "border-fuchsia-200 bg-fuchsia-50",
   },
   {
     id: "crm",
@@ -63,7 +68,8 @@ export const liveProducts = [
     description: "Leads, pipeline, and customer follow-ups for any team.",
     icon: "Users",
     accent: "bg-violet-500",
-    iconWrap: "bg-violet-50 text-violet-700",
+    iconWrap: "bg-violet-100 text-violet-800",
+    surface: "border-violet-200 bg-violet-50",
   },
   {
     id: "erp",
@@ -74,7 +80,8 @@ export const liveProducts = [
     description: "Accounts, vendors, inventory, and day-to-day operations.",
     icon: "LayoutDashboard",
     accent: "bg-slate-700",
-    iconWrap: "bg-slate-100 text-slate-700",
+    iconWrap: "bg-white text-slate-700",
+    surface: "border-slate-300 bg-slate-200",
   },
   {
     id: "qrb",
@@ -85,7 +92,8 @@ export const liveProducts = [
     description: "Bio pages, page QR codes, short links, and scan analytics.",
     icon: "QrCode",
     accent: "bg-cyan-500",
-    iconWrap: "bg-cyan-50 text-cyan-700",
+    iconWrap: "bg-cyan-100 text-cyan-800",
+    surface: "border-cyan-200 bg-cyan-50",
   },
 ];
 
@@ -98,7 +106,7 @@ export const productGroups = [
   {
     id: "property-hospitality",
     title: "Property & hospitality",
-    description: "Sites, restaurants, and salons that need bookings, orders, and follow-ups.",
+    description: "Property teams, restaurants, and salons that need bookings, orders, and follow-ups.",
   },
   {
     id: "business-platforms",

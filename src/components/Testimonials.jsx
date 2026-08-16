@@ -1,33 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-
 const Testimonials = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const sliderRef = useRef(null);
-  const slideCount = 3;
-
-  const updateSlider = useCallback(() => {
-    if (sliderRef.current) {
-      const slideWidth = sliderRef.current.clientWidth / slideCount;
-      sliderRef.current.style.transform = `translateX(-${
-        currentSlide * slideWidth
-      }px)`;
-    }
-  }, [currentSlide, slideCount]);
-
-  useEffect(() => {
-    updateSlider();
-    window.addEventListener("resize", updateSlider);
-    return () => window.removeEventListener("resize", updateSlider);
-  }, [currentSlide, updateSlider]);
-
-  const handlePrevClick = () => {
-    setCurrentSlide((prev) => (prev - 1 + slideCount) % slideCount);
-  };
-
-  const handleNextClick = () => {
-    setCurrentSlide((prev) => (prev + 1) % slideCount);
-  };
-
   const testimonials = [
     {
       name: "Priya Sharma",
@@ -74,99 +45,46 @@ const Testimonials = () => {
   );
 
   return (
-    <section id="testimonials" className="py-16 bg-neutral-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 animate__animated animate__fadeIn">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/20 to-teal-500/20 border border-blue-500/30 rounded-full text-sm font-medium mb-6">
-            <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-            Trusted by Industry Leaders
+    <section id="testimonials" className="bg-neutral-900 py-10 text-white sm:py-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-5 text-center">
+          <div className="mb-2 inline-flex items-center rounded-full border border-blue-500/30 bg-gradient-to-r from-blue-500/20 to-teal-500/20 px-3 py-1.5 text-sm font-medium">
+            <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-400"></span>
+            Client stories
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            Success Stories Across Industries
+          <h2 className="mb-1 text-3xl font-bold">
+            What teams say after going live
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            See how Digital Fuzed has transformed operations and delivered
-            exceptional results across different sectors
+          <p className="mx-auto max-w-2xl text-sm text-gray-400">
+            Schools, clinics, and project teams using Digital Fuzed day to day.
           </p>
         </div>
 
-        <div className="relative">
-          <div className="testimonials-slider overflow-hidden">
-            <div
-              ref={sliderRef}
-              className="flex transition-transform duration-500"
-            >
-              {testimonials.map((testimonial, index) => (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {testimonials.map((testimonial) => (
                 <div
-                  key={index}
-                  className="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4"
+                  key={testimonial.name}
+                  className="h-full rounded-2xl border border-neutral-700 bg-gradient-to-br from-neutral-800 to-neutral-900 p-6 sm:p-8"
                 >
-                  <div className="group bg-gradient-to-br from-neutral-800 to-neutral-900 p-8 rounded-2xl h-full border border-neutral-700 hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10">
-                    <div className="flex items-center mb-6">
-                      <div className="w-14 h-14 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full flex items-center justify-center shadow-lg">
-                        <span className="text-xl font-bold text-white">
-                          {testimonial.initial}
-                        </span>
-                      </div>
-                      <div className="ml-4">
-                        <h4 className="font-bold text-white group-hover:text-blue-300 transition-colors duration-300">
-                          {testimonial.name}
-                        </h4>
-                        <p className="text-gray-400 text-sm">
-                          {testimonial.company}
-                        </p>
-                        <div className="inline-flex items-center px-2 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-full mt-1">
-                          {testimonial.industry}
-                        </div>
+                  <div className="mb-6 flex items-center">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-teal-500 shadow-lg">
+                      <span className="text-xl font-bold text-white">
+                        {testimonial.initial}
+                      </span>
+                    </div>
+                    <div className="ml-4">
+                      <h4 className="font-bold text-white">{testimonial.name}</h4>
+                      <p className="text-sm text-gray-400">{testimonial.company}</p>
+                      <div className="mt-1 inline-flex items-center rounded-full bg-blue-500/20 px-2 py-1 text-xs text-blue-400">
+                        {testimonial.industry}
                       </div>
                     </div>
-                    <div className="mb-6">{renderStars()}</div>
-                    <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
-                      {testimonial.quote}
-                    </p>
                   </div>
+                  <div className="mb-6">{renderStars()}</div>
+                  <p className="leading-relaxed text-gray-300">{testimonial.quote}</p>
                 </div>
               ))}
             </div>
-          </div>
-
-          <button
-            onClick={handlePrevClick}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-blue-600 p-2 rounded-full text-white hover:bg-blue-700 focus:outline-none prev-button"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-          <button
-            onClick={handleNextClick}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-600 p-2 rounded-full text-white hover:bg-blue-700 focus:outline-none next-button"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
-        </div>
       </div>
     </section>
   );

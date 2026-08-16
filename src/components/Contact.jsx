@@ -8,6 +8,7 @@ const Contact = () => {
     project: "",
     message: "",
   });
+  const [status, setStatus] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,9 +28,7 @@ const Contact = () => {
     }
 
     // Here you would typically send the form data to a backend service
-    alert("Thank you for your message. We will get back to you soon!");
-
-    // Reset form after submission
+    setStatus("Thanks — we will get back to you soon.");
     setFormData({
       name: "",
       email: "",
@@ -42,7 +41,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-16 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden"
+      className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-white py-10 sm:py-12"
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
@@ -51,30 +50,28 @@ const Contact = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-12 animate__animated animate__fadeIn">
-          <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500/10 to-teal-500/10 border border-blue-500/20 rounded-full text-sm font-medium mb-6">
-            <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-            Ready to Transform Your Business?
+        <div className="mb-5 text-center">
+          <div className="mb-2 inline-flex items-center rounded-full border border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-teal-500/10 px-3 py-1.5 text-sm font-medium">
+            <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-400"></span>
+            Get in touch
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-            Ready to Stop Losing Money?
+          <h2 className="mb-1 text-3xl font-bold text-gray-900">
+            Tell us what you need
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Tell us about your business problems. We&apos;ll show you exactly
-            how much time and money you can save with our systems. No sales
-            pitch, just real solutions.
+          <p className="mx-auto max-w-2xl text-sm text-gray-600">
+            Share a short note about the work. We reply with a next step, not a
+            pitch deck.
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Contact Form */}
-          <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300 animate__animated animate__fadeInLeft">
+          <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-xl sm:p-8">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                Get Your Free Business Analysis
+              <h3 className="mb-2 text-2xl font-bold text-gray-800">
+                Send a message
               </h3>
               <p className="text-gray-600">
-                Tell us your current problems and we&apos;ll show you exactly
-                how much you can save with our system
+                Name, email, and a few lines on the problem are enough.
               </p>
             </div>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -92,8 +89,9 @@ const Contact = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
+                    autoComplete="name"
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full min-h-12 rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
                 <div>
@@ -109,8 +107,10 @@ const Contact = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
+                    autoComplete="email"
+                    inputMode="email"
                     required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full min-h-12 rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
               </div>
@@ -127,7 +127,7 @@ const Contact = () => {
                   name="company"
                   value={formData.company}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full min-h-12 rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               <div>
@@ -142,13 +142,17 @@ const Contact = () => {
                   name="project"
                   value={formData.project}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full min-h-12 rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="">What&apos;s your business type?</option>
                   <option value="school">School/College Management</option>
                   <option value="hospital">Hospital/Clinic Management</option>
                   <option value="construction">Construction/Real Estate</option>
                   <option value="restaurant">Restaurant/Food Business</option>
+                  <option value="salon">Salon / Spa</option>
+                  <option value="crm">CRM</option>
+                  <option value="erp">ERP</option>
+                  <option value="qr">QR pages / short links</option>
                   <option value="gym">Gym/Fitness Center</option>
                   <option value="shop">Shop/Retail Store</option>
                   <option value="other">Other Business</option>
@@ -168,16 +172,20 @@ const Contact = () => {
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full min-h-12 rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                 ></textarea>
               </div>
               <button
                 type="submit"
-                className="group relative w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25"
+                className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-teal-600 px-6 py-4 font-semibold text-white transition hover:from-blue-700 hover:to-teal-700"
               >
-                <span className="relative z-10">Get My Free Analysis</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-teal-600 rounded-xl blur opacity-0 group-hover:opacity-75 transition-opacity duration-300"></div>
+                Get My Free Analysis
               </button>
+              {status && (
+                <p className="text-center text-sm font-medium text-emerald-700" role="status">
+                  {status}
+                </p>
+              )}
             </form>
           </div>
 
@@ -239,9 +247,12 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg mb-1">Email Us</h4>
-                    <p className="text-gray-400 hover:text-blue-400 transition-colors cursor-pointer">
+                    <a
+                      href="mailto:info@digitalfuzed.com"
+                      className="text-gray-400 hover:text-blue-400"
+                    >
                       info@digitalfuzed.com
-                    </p>
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start group">
@@ -262,9 +273,12 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg mb-1">Call Us</h4>
-                    <p className="text-gray-400 hover:text-blue-400 transition-colors cursor-pointer">
+                    <a
+                      href="tel:+918459148396"
+                      className="text-gray-400 hover:text-blue-400"
+                    >
                       +91 8459148396
-                    </p>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -278,7 +292,7 @@ const Contact = () => {
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
                   <span className="text-lg">
-                    No upfront payment - pay after results
+                    No upfront payment. Pay after results.
                   </span>
                 </div>
                 <div className="flex items-center">
@@ -288,13 +302,13 @@ const Contact = () => {
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
                   <span className="text-lg">
-                    6 months free support included
+                    Six months of support included
                   </span>
                 </div>
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
                   <span className="text-lg">
-                    Works on mobile, tablet, computer
+                    Works on phone, tablet, and computer
                   </span>
                 </div>
               </div>
