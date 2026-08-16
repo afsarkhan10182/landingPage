@@ -1,32 +1,48 @@
+# DigitalFuzed
 
-The Landing page is live on `https://landing-page-ruddy-pi.vercel.app/`
+Marketing site for [DigitalFuzed](https://digitalfuzed.com) — live product demos for school, hospital, real estate, restaurant, salon, CRM, ERP, and QR pages.
 
-## Features
+## Stack
 
-- Responsive design
-- Smooth scroll navigation
-- Mobile-friendly menu
-- Section-based layout
-- Contact form integration
-
-## Tech Stack
-
-- React.js
+- React 18
+- Vite 6
 - Tailwind CSS
-- Vite
-- EmailJS for contact form (Not Implemented yet)
 
-## Getting Started
+## Setup
 
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Start development server: `npm run dev`
-4. Build for production: `npm run build`
+Requires Node.js 20+.
 
-## Contributing
+```bash
+npm install
+npm run dev
+```
 
-1. Fork the repository
-2. Create your feature branch: `git checkout -b feature/YourFeature`
-3. Commit your changes: `git commit -m 'Add some feature'`
-4. Push to the branch: `git push origin feature/YourFeature`
-5. Open a pull request
+Open the URL Vite prints (usually `http://localhost:5173`).
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Local development |
+| `npm run build` | Production build into `dist/` |
+| `npm run preview` | Serve the production build locally |
+| `npm run lint` | ESLint |
+
+## Layout
+
+```
+src/
+  components/   Page sections (header, hero, products, contact)
+  data/         Live product list and URLs
+```
+
+Product links live in `src/data/liveProducts.js`.
+
+## Deploy
+
+Production path: `/home/digitalfuzed/htdocs/digitalfuzed.com`
+
+Push to `digitalfuzed-landing-page` (or run **Actions → Deploy to Server**) to:
+
+1. Run `npm ci` and `npm run build`
+2. Copy `dist/` to the server over SSH
+
+GitHub repository secrets: `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_SSH_KEY`. Optional: `DEPLOY_PORT` (defaults to `22`).
