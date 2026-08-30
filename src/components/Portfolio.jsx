@@ -9,7 +9,7 @@ import {
   UtensilsCrossed,
 } from "lucide-react";
 import PropTypes from "prop-types";
-import { liveProducts, productGroups, productsByGroup } from "../data/liveProducts";
+import { productGroups, productsByGroup } from "../data/liveProducts";
 
 const ICONS = {
   GraduationCap,
@@ -94,14 +94,13 @@ const Portfolio = () => {
         <div className="mb-5 text-center">
           <div className="mb-2 inline-flex items-center rounded-full border border-green-500/20 bg-gradient-to-r from-green-500/10 to-blue-500/10 px-3 py-1.5 text-sm font-medium">
             <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-500"></span>
-            {liveProducts.length} live products
+            Already running a business?
           </div>
           <h2 className="mb-1 text-3xl font-bold md:text-4xl">
-            Open a working product
+            See the software working before paying
           </h2>
           <p className="mx-auto max-w-2xl text-sm text-gray-600">
-            Every item below is already running. Grouped by what it is for, so
-            you can pick a demo in a few seconds.
+            Open a live demo or talk to us on WhatsApp for the right setup.
           </p>
         </div>
 
@@ -134,7 +133,7 @@ const Portfolio = () => {
             href="#contact"
             className="inline-block rounded-md bg-blue-600 px-8 py-3 text-white transition duration-300 hover:scale-105 hover:bg-blue-700"
           >
-            Start Your Project
+            Request Free Demo
           </a>
         </div>
       </div>

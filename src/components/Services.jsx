@@ -16,14 +16,14 @@ const Services = () => {
         <div className="mb-5 text-center">
           <div className="mb-2 inline-flex items-center rounded-full border border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-teal-500/10 px-3 py-1.5 text-sm font-medium">
             <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-blue-500"></span>
-            Digital Solutions for Every Industry
+            Software Solutions
           </div>
           <h2 className="mb-1 text-3xl font-bold text-gray-900">
-            One family of live products
+            Choose the software your business needs
           </h2>
           <p className="mx-auto max-w-2xl text-sm text-gray-600">
-            Start with the group that matches your business. Each name below is
-            a working demo, not a mockup.
+            Start with a live demo, then we help with setup, configuration, and
+            training.
           </p>
         </div>
 
@@ -36,7 +36,7 @@ const Services = () => {
                 className="flex h-full flex-col rounded-2xl border border-gray-100 bg-white p-5 shadow-lg"
               >
                 <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-blue-600">
-                  {items.length} live products
+                  {items.length} live demos
                 </p>
                 <h3 className="mb-3 text-2xl font-bold text-gray-800">
                   {group.title}
@@ -72,7 +72,7 @@ const Services = () => {
                   href="#portfolio"
                   className="mt-auto inline-flex min-h-12 items-center justify-center rounded-lg bg-gradient-to-r from-blue-600 to-teal-600 px-4 py-3 text-sm font-semibold text-white transition hover:opacity-90"
                 >
-                  Compare these demos
+                  Explore Live Demos
                 </a>
               </div>
             );
@@ -80,17 +80,20 @@ const Services = () => {
         </div>
 
         <div className="rounded-2xl bg-gradient-to-r from-slate-800 to-slate-900 px-5 py-6 text-center text-white sm:px-8">
-          <h3 className="text-2xl font-bold">We also build for</h3>
+          <h3 className="text-2xl font-bold">Why DigitalFuzed</h3>
           <p className="mt-1 text-sm text-gray-300">
-            If your industry is not in the list above, we can still tailor a
-            system.
+            Software is only useful when your team can actually run it.
           </p>
           <div className="mt-5 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
             {[
-              { name: "Gym Member Management", icon: "💪" },
-              { name: "Shop Inventory Tracking", icon: "🏪" },
-              { name: "Taxi Booking System", icon: "🚗" },
-              { name: "Custom Solutions", icon: "⚙️" },
+              { name: "Cloud based", icon: "☁️" },
+              { name: "Setup & configuration", icon: "⚙️" },
+              { name: "Staff training", icon: "🎓" },
+              { name: "Maintenance & updates", icon: "✓" },
+              { name: "Secure hosting", icon: "🔒" },
+              { name: "Customization available", icon: "🛠️" },
+              { name: "WhatsApp support", icon: "💬" },
+              { name: "Live demo before paying", icon: "▶" },
             ].map((service) => (
               <div key={service.name} className="flex items-center justify-center gap-2 md:flex-col">
                 <span className="text-2xl">{service.icon}</span>
@@ -102,7 +105,7 @@ const Services = () => {
             href="#contact"
             className="mt-5 inline-flex items-center rounded-xl bg-gradient-to-r from-blue-600 to-teal-600 px-7 py-3 font-semibold text-white transition hover:from-blue-700 hover:to-teal-700"
           >
-            Get Your Custom Solution
+            Request Free Demo
           </a>
         </div>
       </div>

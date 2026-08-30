@@ -32,75 +32,54 @@ const Hero = () => {
           <div className="space-y-8">
             <div className="inline-flex items-center rounded-full border border-blue-500/30 bg-gradient-to-r from-blue-500/20 to-teal-500/20 px-4 py-2 text-sm font-medium backdrop-blur-sm">
               <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-400"></span>
-              {liveProducts.length} live products you can open now
+              Ready-to-use software for growing businesses
             </div>
 
             <h1 className="text-4xl font-bold leading-tight md:text-6xl">
-              Stop Losing Money
+              DigitalFuzed
               <br />
               <span className="bg-gradient-to-r from-blue-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">
-                on Manual Processes
+                Business Software
               </span>
               <br />
-              <span className="text-3xl text-gray-300 md:text-4xl">
-                We Fix That
-              </span>
             </h1>
 
-            <div className="space-y-1 text-lg text-gray-300 md:text-xl">
-              <p>
-                Is your school still using{" "}
-                <span className="font-semibold text-red-400">
-                  paper attendance sheets
-                </span>
-                ?
-              </p>
-              <p>
-                Is your clinic&apos;s{" "}
-                <span className="font-semibold text-red-400">
-                  billing taking forever
-                </span>
-                ?
-              </p>
-              <p>
-                Are construction projects{" "}
-                <span className="font-semibold text-red-400">
-                  going over budget
-                </span>
-                ?
-              </p>
-            </div>
+            <p className="max-w-2xl text-lg leading-relaxed text-gray-300 md:text-xl">
+              Ready-to-use salon, restaurant, ERP, school, and CRM software
+              with setup, training, secure hosting, maintenance, and WhatsApp
+              support.
+            </p>
 
             <div className="flex flex-col gap-4 sm:flex-row">
               <a
                 href="#contact"
                 className="group relative transform rounded-xl bg-gradient-to-r from-blue-600 to-teal-600 px-8 py-4 text-center text-lg font-semibold transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-teal-700 hover:shadow-2xl hover:shadow-blue-500/25"
               >
-                Get Your Solution
+                Book Free Demo
               </a>
               <a
                 href="#portfolio"
                 className="rounded-xl border-2 border-white/20 px-8 py-4 text-center text-lg font-semibold backdrop-blur-sm transition-all duration-300 hover:border-blue-400 hover:bg-blue-400/10"
               >
-                See live products
+                Explore Software
               </a>
             </div>
 
             <div className="grid grid-cols-3 gap-6">
               {[
                 {
-                  value: "200+",
-                  label: "Businesses Automated",
+                  value: "Setup",
+                  label: "Configuration included",
                   color: "text-blue-400",
                 },
                 {
-                  value: "15hrs",
-                  label: "Saved Per Week",
+                  value: "Training",
+                  label: "For your staff",
                   color: "text-teal-400",
                 },
                 {
-                  value: "30%",
-                  label: "Cost Reduction",
+                  value: "Support",
+                  label: "WhatsApp available",
                   color: "text-cyan-400",
                 },
               ].map((stat) => (
@@ -122,7 +101,7 @@ const Hero = () => {
             <div className="absolute -inset-4 animate-pulse rounded-2xl bg-gradient-to-r from-blue-600 via-teal-600 to-emerald-600 opacity-20 blur-2xl"></div>
             <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-6 shadow-2xl backdrop-blur-xl">
               <div className="mb-5 text-center">
-                <h3 className="mb-2 text-xl font-bold">Live products</h3>
+                <h3 className="mb-2 text-xl font-bold">Live demos</h3>
                 <div className="flex h-10 items-center justify-center">
                   <span
                     key={words[currentWord]}

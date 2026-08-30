@@ -1,29 +1,6 @@
-import { useState, useEffect } from "react";
 import { Linkedin, Twitter, Github } from "lucide-react";
 import { liveProducts } from "../data/liveProducts";
 const Footer = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const toggleVisibility = () => {
-      setIsVisible(window.scrollY > 300);
-    };
-
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    const email = e.target.querySelector('input[type="email"]').value;
-    alert(`Thank you for subscribing with: ${email}`);
-    e.target.reset();
-  };
-
   return (
     <footer className="bg-neutral-900 pb-24 pt-16 text-white sm:pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,8 +16,7 @@ const Footer = () => {
               </h3>
             </div>
             <p className="text-gray-400">
-              Software for Indian schools, clinics, shops, and offices. Built in
-              Mumbai, running live today.
+              Ready-to-use business software with setup, training, and support.
             </p>
             <div className="flex space-x-4">
               <a
@@ -70,10 +46,10 @@ const Footer = () => {
             <ul className="space-y-0.5">
               {[
                 { href: "#hero", label: "Home" },
-                { href: "#services", label: "Services" },
-                { href: "#portfolio", label: "Live Products" },
-                { href: "#team", label: "Team" },
-                { href: "#contact", label: "Contact" },
+                { href: "#services", label: "Solutions" },
+                { href: "#portfolio", label: "Live Demos" },
+                { href: "#how-it-works", label: "How It Works" },
+                { href: "#contact", label: "Book Free Demo" },
               ].map((link) => (
                 <li key={link.href}>
                   <a
@@ -106,26 +82,23 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Newsletter */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Newsletter</h4>
+            <h4 className="text-lg font-bold mb-4">Book a Demo</h4>
             <p className="text-gray-400 mb-4">
-              Subscribe to our newsletter for updates and insights.
+              See the software working before paying.
             </p>
-            <form onSubmit={handleNewsletterSubmit} className="space-y-4">
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="w-full min-h-12 rounded-md border border-neutral-700 bg-neutral-800 px-4 py-3 text-base text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300"
-              >
-                Subscribe
-              </button>
-            </form>
+            <a
+              href="#contact"
+              className="inline-flex min-h-12 items-center rounded-md bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700"
+            >
+              Request Free Demo
+            </a>
+            <a
+              href="mailto:sales@digitalfuzed.com"
+              className="mt-4 block text-gray-400 transition-colors hover:text-blue-400"
+            >
+              sales@digitalfuzed.com
+            </a>
           </div>
         </div>
 
@@ -151,30 +124,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-
-      {/* Scroll to Top Button */}
-      {isVisible && (
-        <button
-          type="button"
-          onClick={scrollToTop}
-          aria-label="Back to top"
-          className="fixed bottom-[max(5.5rem,calc(env(safe-area-inset-bottom)+4.5rem))] right-4 z-40 rounded-full bg-blue-600 p-3 text-white shadow-lg hover:bg-blue-700 sm:right-6"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 10l7-7m0 0l7 7m-7-7v18"
-            />
-          </svg>
-        </button>
-      )}
     </footer>
   );
 };

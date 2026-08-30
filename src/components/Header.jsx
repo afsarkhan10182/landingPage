@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 
 const navLinks = [
   { href: "#hero", label: "Home" },
-  { href: "#services", label: "Services" },
-  { href: "#portfolio", label: "Live Products" },
-  { href: "#process", label: "Process" },
-  { href: "#team", label: "Team" },
-  { href: "#testimonials", label: "Testimonials" },
+  { href: "#services", label: "Solutions" },
+  { href: "#portfolio", label: "Live Demos" },
+  { href: "#how-it-works", label: "How It Works" },
 ];
 
 const Header = () => {
@@ -117,7 +115,7 @@ const Header = () => {
                   : "bg-blue-600 hover:bg-blue-700"
               }`}
             >
-              Contact
+              Book Free Demo
             </a>
           </div>
 
@@ -165,7 +163,7 @@ const Header = () => {
                   : "bg-blue-600 hover:bg-blue-700"
               }`}
             >
-              Contact
+              Book Free Demo
             </a>
           </div>
         </div>
