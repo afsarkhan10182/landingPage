@@ -70,7 +70,7 @@ const Services = () => {
 
                 <a
                   href="#portfolio"
-                  className="mt-auto inline-flex min-h-12 items-center justify-center rounded-lg bg-gradient-to-r from-blue-600 to-teal-600 px-4 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+                  className="mt-auto inline-flex min-h-12 items-center justify-center rounded-lg bg-[#38BDF8] px-4 py-3 text-sm font-extrabold text-[#0F172A] transition hover:bg-[#0F172A] hover:text-white"
                 >
                   Explore Live Demos
                 </a>
@@ -97,13 +97,13 @@ const Services = () => {
             ].map((service) => (
               <div key={service.name} className="flex items-center justify-center gap-2 md:flex-col">
                 <span className="text-2xl">{service.icon}</span>
-                <h4 className="text-sm font-semibold text-blue-400">{service.name}</h4>
+                <h4 className="text-sm font-semibold text-[#38BDF8]">{service.name}</h4>
               </div>
             ))}
           </div>
           <a
             href="#contact"
-            className="mt-5 inline-flex items-center rounded-xl bg-gradient-to-r from-blue-600 to-teal-600 px-7 py-3 font-semibold text-white transition hover:from-blue-700 hover:to-teal-700"
+            className="mt-5 inline-flex items-center rounded-xl bg-[#38BDF8] px-7 py-3 font-extrabold text-[#0F172A] transition hover:bg-white"
           >
             Request Free Demo
           </a>

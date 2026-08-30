@@ -1,5 +1,6 @@
-import { Linkedin, Twitter, Github } from "lucide-react";
+import { Facebook, Instagram } from "lucide-react";
 import { liveProducts } from "../data/liveProducts";
+import LogoMark from "./LogoMark";
 const Footer = () => {
   return (
     <footer className="bg-neutral-900 pb-24 pt-16 text-white sm:pb-8">
@@ -8,11 +9,9 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-teal-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">DF</span>
-              </div>
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
-                Digital Fuzed
+              <LogoMark />
+              <h3 className="text-2xl font-extrabold text-white">
+                Digital<span className="text-[#38BDF8]">Fuzed</span>
               </h3>
             </div>
             <p className="text-gray-400">
@@ -20,22 +19,22 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://www.instagram.com/digitalfuzed/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="DigitalFuzed on Instagram"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                <Linkedin className="w-6 h-6" />
+                <Instagram className="w-6 h-6" />
               </a>
               <a
-                href="#"
+                href="https://www.facebook.com/profile.php?id=61593977212318"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="DigitalFuzed on Facebook"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                <Twitter className="w-6 h-6" />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Github className="w-6 h-6" />
+                <Facebook className="w-6 h-6" />
               </a>
             </div>
           </div>
@@ -49,7 +48,7 @@ const Footer = () => {
                 { href: "#services", label: "Solutions" },
                 { href: "#portfolio", label: "Live Demos" },
                 { href: "#how-it-works", label: "How It Works" },
-                { href: "#contact", label: "Book Free Demo" },
+                { href: "#contact", label: "Request Free Demo" },
               ].map((link) => (
                 <li key={link.href}>
                   <a
@@ -73,7 +72,7 @@ const Footer = () => {
                     href={product.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block py-0.5 text-gray-400 transition-colors hover:text-blue-400"
+                    className="inline-block py-0.5 text-gray-400 transition-colors hover:text-[#38BDF8]"
                   >
                     {product.name}
                   </a>
@@ -83,19 +82,19 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-bold mb-4">Book a Demo</h4>
+            <h4 className="text-lg font-bold mb-4">Request Free Demo</h4>
             <p className="text-gray-400 mb-4">
               See the software working before paying.
             </p>
             <a
               href="#contact"
-              className="inline-flex min-h-12 items-center rounded-md bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700"
+              className="inline-flex min-h-12 items-center rounded-md bg-[#38BDF8] px-5 py-3 font-extrabold text-[#0F172A] transition hover:bg-white"
             >
               Request Free Demo
             </a>
             <a
               href="mailto:sales@digitalfuzed.com"
-              className="mt-4 block text-gray-400 transition-colors hover:text-blue-400"
+              className="mt-4 block text-gray-400 transition-colors hover:text-[#38BDF8]"
             >
               sales@digitalfuzed.com
             </a>
@@ -106,7 +105,7 @@ const Footer = () => {
         <div className="pt-8">
           <div className="grid md:grid-cols-2 gap-4 items-center">
             <p className="text-gray-400 text-sm text-center md:text-left">
-              © 2026 Digital Fuzed. All rights reserved.
+              © 2026 DigitalFuzed. All rights reserved.
             </p>
             <div className="flex justify-center md:justify-end space-x-6">
               {["Privacy Policy", "Terms of Service", "Cookie Policy"].map(

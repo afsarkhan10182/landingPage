@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import LogoMark from "./LogoMark";
 
 const navLinks = [
   { href: "#hero", label: "Home" },
@@ -69,27 +70,25 @@ const Header = () => {
   }, []);
 
   const linkClass = (href, extra = "") =>
-    `rounded-md px-3 py-2.5 text-sm font-medium transition ${extra} ${
+    `rounded-md px-3 py-2.5 text-sm font-semibold transition ${extra} ${
       activeId === href
         ? "bg-white/15 text-white"
         : "text-white/80 hover:bg-white/10 hover:text-white"
     }`;
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-slate-900/95 text-white backdrop-blur-xl">
+    <nav className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0F172A]/95 text-white backdrop-blur-xl">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <a
             href="#hero"
             onClick={scrollToSection}
             className="flex items-center space-x-2"
-            aria-label="Digital Fuzed home"
+            aria-label="DigitalFuzed home"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-teal-500">
-              <span className="text-sm font-bold text-white">DF</span>
-            </div>
-            <span className="bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-xl font-bold text-transparent">
-              Digital Fuzed
+            <LogoMark />
+            <span className="text-xl font-extrabold text-white">
+              Digital<span className="text-[#38BDF8]">Fuzed</span>
             </span>
           </a>
 
@@ -111,11 +110,11 @@ const Header = () => {
               aria-current={activeId === "#contact" ? "page" : undefined}
               className={`ml-2 rounded-md px-4 py-2.5 text-sm font-medium ${
                 activeId === "#contact"
-                  ? "bg-blue-500 ring-2 ring-white/30"
-                  : "bg-blue-600 hover:bg-blue-700"
+                  ? "bg-[#38BDF8] text-[#0F172A] ring-2 ring-white/30"
+                  : "bg-[#0369A1] hover:bg-[#38BDF8] hover:text-[#0F172A]"
               }`}
             >
-              Book Free Demo
+              Request Free Demo
             </a>
           </div>
 
@@ -159,11 +158,11 @@ const Header = () => {
               onClick={scrollToSection}
               className={`mt-2 block rounded-md px-4 py-3 text-center text-base font-medium ${
                 activeId === "#contact"
-                  ? "bg-blue-500 ring-2 ring-white/30"
-                  : "bg-blue-600 hover:bg-blue-700"
+                  ? "bg-[#38BDF8] text-[#0F172A] ring-2 ring-white/30"
+                  : "bg-[#0369A1] hover:bg-[#38BDF8] hover:text-[#0F172A]"
               }`}
             >
-              Book Free Demo
+              Request Free Demo
             </a>
           </div>
         </div>

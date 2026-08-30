@@ -168,7 +168,7 @@ Software Interested In: ${formData.software}`
               </div>
               <button
                 type="submit"
-                className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-teal-600 px-6 py-4 font-semibold text-white transition hover:from-blue-700 hover:to-teal-700"
+                className="w-full rounded-xl bg-[#38BDF8] px-6 py-4 font-extrabold text-[#0F172A] transition hover:bg-[#0F172A] hover:text-white"
               >
                 Request Demo
               </button>
@@ -183,7 +183,7 @@ Software Interested In: ${formData.software}`
           {/* Contact Information */}
           <div className="space-y-8 animate__animated animate__fadeInRight">
             <div className="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-8 rounded-2xl shadow-xl border border-slate-700">
-              <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
+              <h3 className="text-2xl font-bold mb-6 text-[#38BDF8]">
                 Get in Touch
               </h3>
               <div className="space-y-6">
@@ -240,7 +240,7 @@ Software Interested In: ${formData.software}`
                     <h4 className="font-semibold text-lg mb-1">Email Us</h4>
                     <a
                       href="mailto:sales@digitalfuzed.com"
-                      className="text-gray-400 hover:text-blue-400"
+                      className="text-gray-400 hover:text-[#38BDF8]"
                     >
                       sales@digitalfuzed.com
                     </a>
@@ -266,7 +266,7 @@ Software Interested In: ${formData.software}`
                     <h4 className="font-semibold text-lg mb-1">Call Us</h4>
                     <a
                       href="tel:+918459148396"
-                      className="text-gray-400 hover:text-blue-400"
+                      className="text-gray-400 hover:text-[#38BDF8]"
                     >
                       +91 8459148396
                     </a>
@@ -275,7 +275,7 @@ Software Interested In: ${formData.software}`
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-600 to-teal-600 text-white p-8 rounded-2xl shadow-xl">
+            <div className="bg-[#0F172A] text-white p-8 rounded-2xl shadow-xl">
               <h3 className="text-2xl font-bold mb-6">
                 Why Choose DigitalFuzed?
               </h3>

@@ -4,6 +4,7 @@ import {
   productGroups,
   productsByGroup,
 } from "../data/liveProducts";
+import LogoMark from "./LogoMark";
 
 const Hero = () => {
   const [currentWord, setCurrentWord] = useState(0);
@@ -19,12 +20,12 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 py-20 pt-24 text-white"
+      className="relative overflow-hidden bg-[#0F172A] py-20 pt-24 text-white"
     >
       <div className="absolute inset-0">
-        <div className="absolute left-10 top-20 h-72 w-72 animate-pulse rounded-full bg-blue-600/15 blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 h-96 w-96 animate-pulse rounded-full bg-emerald-500/15 blur-3xl delay-1000"></div>
-        <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 transform animate-pulse rounded-full bg-teal-500/10 blur-2xl delay-500"></div>
+        <div className="absolute right-[16%] top-24 h-24 w-24 rounded-3xl border-2 border-[#0369A1]/40"></div>
+        <div className="absolute right-[9%] top-44 h-16 w-16 rounded-2xl border-2 border-[#0369A1]/40"></div>
+        <div className="absolute bottom-28 right-[24%] h-20 w-20 rounded-2xl border-2 border-[#0369A1]/40"></div>
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -35,34 +36,43 @@ const Hero = () => {
               Ready-to-use software for growing businesses
             </div>
 
-            <h1 className="text-4xl font-bold leading-tight md:text-6xl">
-              DigitalFuzed
-              <br />
-              <span className="bg-gradient-to-r from-blue-400 via-teal-400 to-emerald-400 bg-clip-text text-transparent">
-                Business Software
-              </span>
-              <br />
-            </h1>
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+              <LogoMark size="lg" />
+              <h1 className="text-5xl font-extrabold leading-tight md:text-7xl">
+                Digital<span className="text-[#38BDF8]">Fuzed</span>
+              </h1>
+            </div>
 
-            <p className="max-w-2xl text-lg leading-relaxed text-gray-300 md:text-xl">
-              Ready-to-use salon, restaurant, ERP, school, and CRM software
-              with setup, training, secure hosting, maintenance, and WhatsApp
+            <p className="max-w-3xl text-3xl font-extrabold leading-tight md:text-4xl">
+              Business software that works for your business.
+            </p>
+
+            <p className="max-w-2xl text-xl font-semibold leading-relaxed text-slate-300">
+              Salon • Restaurant • ERP • School • CRM • Real Estate
+            </p>
+
+            <p className="max-w-2xl text-lg leading-relaxed text-slate-300">
+              Ready-to-use software with cloud setup, customization, and
               support.
             </p>
 
             <div className="flex flex-col gap-4 sm:flex-row">
               <a
                 href="#contact"
-                className="group relative transform rounded-xl bg-gradient-to-r from-blue-600 to-teal-600 px-8 py-4 text-center text-lg font-semibold transition-all duration-300 hover:scale-105 hover:from-blue-700 hover:to-teal-700 hover:shadow-2xl hover:shadow-blue-500/25"
+                className="group relative transform rounded-xl bg-[#38BDF8] px-8 py-4 text-center text-lg font-extrabold text-[#0F172A] transition-all duration-300 hover:scale-105 hover:bg-white"
               >
-                Book Free Demo
+                Request Free Demo
               </a>
               <a
                 href="#portfolio"
-                className="rounded-xl border-2 border-white/20 px-8 py-4 text-center text-lg font-semibold backdrop-blur-sm transition-all duration-300 hover:border-blue-400 hover:bg-blue-400/10"
+                className="rounded-xl border-2 border-white/20 px-8 py-4 text-center text-lg font-semibold backdrop-blur-sm transition-all duration-300 hover:border-[#38BDF8] hover:bg-[#38BDF8]/10"
               >
-                Explore Software
+                Try Live Demo
               </a>
+            </div>
+
+            <div className="inline-flex rounded-xl bg-[#38BDF8] px-6 py-3 text-xl font-extrabold text-[#0F172A]">
+              digitalfuzed.com
             </div>
 
             <div className="grid grid-cols-3 gap-6">
@@ -70,26 +80,26 @@ const Hero = () => {
                 {
                   value: "Setup",
                   label: "Configuration included",
-                  color: "text-blue-400",
+                  color: "text-[#38BDF8]",
                 },
                 {
                   value: "Training",
                   label: "For your staff",
-                  color: "text-teal-400",
+                  color: "text-white",
                 },
                 {
                   value: "Support",
                   label: "WhatsApp available",
-                  color: "text-cyan-400",
+                  color: "text-[#38BDF8]",
                 },
               ].map((stat) => (
                 <div key={stat.label} className="group text-center">
                   <p
-                    className={`text-3xl font-bold ${stat.color} transition-transform duration-300 group-hover:scale-110`}
+                    className={`text-3xl font-extrabold ${stat.color} transition-transform duration-300 group-hover:scale-110`}
                   >
                     {stat.value}
                   </p>
-                  <p className="text-sm font-medium text-gray-400">
+                  <p className="text-sm font-medium text-slate-400">
                     {stat.label}
                   </p>
                 </div>
@@ -98,14 +108,13 @@ const Hero = () => {
           </div>
 
           <div className="relative">
-            <div className="absolute -inset-4 animate-pulse rounded-2xl bg-gradient-to-r from-blue-600 via-teal-600 to-emerald-600 opacity-20 blur-2xl"></div>
-            <div className="relative rounded-2xl border border-white/10 bg-gradient-to-br from-slate-800/50 to-slate-900/50 p-6 shadow-2xl backdrop-blur-xl">
+            <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-xl">
               <div className="mb-5 text-center">
                 <h3 className="mb-2 text-xl font-bold">Live demos</h3>
                 <div className="flex h-10 items-center justify-center">
                   <span
                     key={words[currentWord]}
-                    className="animate-fade-in bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-2xl font-bold text-transparent"
+                    className="animate-fade-in text-2xl font-extrabold text-[#38BDF8]"
                   >
                     {words[currentWord]}
                   </span>

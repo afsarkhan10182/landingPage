@@ -53,7 +53,7 @@ const ProductCard = ({ product }) => {
         {product.description}
       </p>
 
-      <span className="mt-3 inline-flex min-h-10 items-center justify-center rounded-lg bg-gradient-to-r from-blue-600 to-teal-600 px-3 text-sm font-semibold text-white group-hover:from-blue-700 group-hover:to-teal-700">
+      <span className="mt-3 inline-flex min-h-10 items-center justify-center rounded-lg bg-[#0F172A] px-3 text-sm font-semibold text-white group-hover:bg-[#0369A1]">
         Open live demo
         <svg
           className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5"
@@ -131,7 +131,7 @@ const Portfolio = () => {
         <div className="mt-8 text-center">
           <a
             href="#contact"
-            className="inline-block rounded-md bg-blue-600 px-8 py-3 text-white transition duration-300 hover:scale-105 hover:bg-blue-700"
+            className="inline-block rounded-md bg-[#38BDF8] px-8 py-3 font-extrabold text-[#0F172A] transition duration-300 hover:scale-105 hover:bg-[#0F172A] hover:text-white"
           >
             Request Free Demo
           </a>
