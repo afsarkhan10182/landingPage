@@ -71,10 +71,6 @@ const Hero = () => {
               </a>
             </div>
 
-            <div className="inline-flex rounded-xl bg-[#38BDF8] px-6 py-3 text-xl font-extrabold text-[#0F172A]">
-              digitalfuzed.com
-            </div>
-
             <div className="grid grid-cols-3 gap-6">
               {[
                 {

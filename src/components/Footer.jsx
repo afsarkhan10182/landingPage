@@ -1,6 +1,35 @@
-import { Facebook, Instagram } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
 import { liveProducts } from "../data/liveProducts";
 import LogoMark from "./LogoMark";
+
+const socialLinks = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/digitalfuzed/",
+    Icon: Instagram,
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/digitalfuzed",
+    Icon: Facebook,
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/@DigitalFuzed",
+    Icon: Youtube,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/digitalfuzed",
+    Icon: Linkedin,
+  },
+  {
+    label: "X",
+    href: "https://x.com/digitalfuzed",
+    Icon: Twitter,
+  },
+];
+
 const Footer = () => {
   return (
     <footer className="bg-neutral-900 pb-24 pt-16 text-white sm:pb-8">
@@ -17,25 +46,19 @@ const Footer = () => {
             <p className="text-gray-400">
               Ready-to-use business software with setup, training, and support.
             </p>
-            <div className="flex space-x-4">
-              <a
-                href="https://www.instagram.com/digitalfuzed/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="DigitalFuzed on Instagram"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Instagram className="w-6 h-6" />
-              </a>
-              <a
-                href="https://www.facebook.com/profile.php?id=61593977212318"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="DigitalFuzed on Facebook"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Facebook className="w-6 h-6" />
-              </a>
+            <div className="flex flex-wrap gap-4">
+              {socialLinks.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`DigitalFuzed on ${label}`}
+                  className="text-gray-400 transition-colors hover:text-[#38BDF8]"
+                >
+                  <Icon className="w-6 h-6" />
+                </a>
+              ))}
             </div>
           </div>
 
