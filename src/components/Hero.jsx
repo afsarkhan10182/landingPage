@@ -20,38 +20,32 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-[#0F172A] py-20 pt-24 text-white"
+      className="relative overflow-hidden bg-[#0F172A] pb-14 pt-24 text-white sm:pb-20"
     >
-      <div className="absolute inset-0">
-        <div className="absolute right-[16%] top-24 h-24 w-24 rounded-3xl border-2 border-[#0369A1]/40"></div>
-        <div className="absolute right-[9%] top-44 h-16 w-16 rounded-2xl border-2 border-[#0369A1]/40"></div>
-        <div className="absolute bottom-28 right-[24%] h-20 w-20 rounded-2xl border-2 border-[#0369A1]/40"></div>
-      </div>
-
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="space-y-8">
-            <div className="inline-flex items-center rounded-full border border-blue-500/30 bg-gradient-to-r from-blue-500/20 to-teal-500/20 px-4 py-2 text-sm font-medium backdrop-blur-sm">
+        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+          <div className="space-y-6 sm:space-y-8">
+            <div className="inline-flex max-w-full items-center rounded-full border border-blue-500/30 bg-white/10 px-4 py-2 text-sm font-medium backdrop-blur-sm">
               <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-400"></span>
               Ready-to-use software for growing businesses
             </div>
 
             <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
               <LogoMark size="lg" />
-              <h1 className="text-5xl font-extrabold leading-tight md:text-7xl">
+              <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl md:text-7xl">
                 Digital<span className="text-[#38BDF8]">Fuzed</span>
               </h1>
             </div>
 
-            <p className="max-w-3xl text-3xl font-extrabold leading-tight md:text-4xl">
-              Business software that works for your business.
+            <p className="max-w-3xl text-2xl font-extrabold leading-tight sm:text-3xl md:text-4xl">
+              Ready-to-use business software with live demos.
             </p>
 
-            <p className="max-w-2xl text-xl font-semibold leading-relaxed text-slate-300">
+            <p className="max-w-2xl text-base font-semibold leading-relaxed text-slate-300 sm:text-xl">
               Salon • Restaurant • ERP • School • CRM • Real Estate
             </p>
 
-            <p className="max-w-2xl text-lg leading-relaxed text-slate-300">
+            <p className="max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
               Ready-to-use software with cloud setup, customization, and
               support.
             </p>
@@ -59,19 +53,19 @@ const Hero = () => {
             <div className="flex flex-col gap-4 sm:flex-row">
               <a
                 href="#contact"
-                className="group relative transform rounded-xl bg-[#38BDF8] px-8 py-4 text-center text-lg font-extrabold text-[#0F172A] transition-all duration-300 hover:scale-105 hover:bg-white"
+                className="inline-flex min-h-12 items-center justify-center rounded-lg bg-[#38BDF8] px-6 py-3 text-center font-extrabold text-[#0F172A] transition hover:bg-white sm:px-8"
               >
                 Request Free Demo
               </a>
               <a
                 href="#portfolio"
-                className="rounded-xl border-2 border-white/20 px-8 py-4 text-center text-lg font-semibold backdrop-blur-sm transition-all duration-300 hover:border-[#38BDF8] hover:bg-[#38BDF8]/10"
+                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/20 px-6 py-3 text-center font-semibold backdrop-blur-sm transition hover:border-[#38BDF8] hover:bg-[#38BDF8]/10 sm:px-8"
               >
                 Try Live Demo
               </a>
             </div>
 
-            <div className="grid grid-cols-3 gap-6">
+            <div className="grid grid-cols-3 gap-2 sm:gap-6">
               {[
                 {
                   value: "Setup",
@@ -91,11 +85,11 @@ const Hero = () => {
               ].map((stat) => (
                 <div key={stat.label} className="group text-center">
                   <p
-                    className={`text-3xl font-extrabold ${stat.color} transition-transform duration-300 group-hover:scale-110`}
+                    className={`text-xl font-extrabold ${stat.color} sm:text-3xl`}
                   >
                     {stat.value}
                   </p>
-                  <p className="text-sm font-medium text-slate-400">
+                  <p className="text-xs font-medium leading-snug text-slate-400 sm:text-sm">
                     {stat.label}
                   </p>
                 </div>
@@ -104,13 +98,13 @@ const Hero = () => {
           </div>
 
           <div className="relative">
-            <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur-xl">
+            <div className="relative rounded-xl border border-white/10 bg-white/5 p-4 shadow-lg backdrop-blur-xl sm:p-6">
               <div className="mb-5 text-center">
                 <h3 className="mb-2 text-xl font-bold">Live demos</h3>
                 <div className="flex h-10 items-center justify-center">
                   <span
                     key={words[currentWord]}
-                    className="animate-fade-in text-2xl font-extrabold text-[#38BDF8]"
+                    className="animate-fade-in text-xl font-extrabold text-[#38BDF8] sm:text-2xl"
                   >
                     {words[currentWord]}
                   </span>
@@ -130,9 +124,9 @@ const Hero = () => {
                           href={product.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-between rounded-lg border border-white/10 bg-slate-800/60 px-3 py-2 transition hover:border-teal-400/50 hover:bg-teal-500/10"
+                          className="flex min-w-0 items-center justify-between gap-3 rounded-lg border border-white/10 bg-slate-800/60 px-3 py-2 transition hover:border-teal-400/50 hover:bg-teal-500/10"
                         >
-                          <span className="text-sm font-semibold text-white">
+                          <span className="min-w-0 text-sm font-semibold text-white">
                             {product.name}
                           </span>
                           <span className="hidden font-mono text-[11px] text-slate-400 sm:inline">

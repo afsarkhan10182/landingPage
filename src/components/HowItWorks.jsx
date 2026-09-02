@@ -18,7 +18,7 @@ const steps = [
 const HowItWorks = () => (
   <section
     id="how-it-works"
-    className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-10 text-white sm:py-12"
+    className="bg-slate-900 py-10 text-white sm:py-12"
   >
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="mb-6 text-center">
@@ -26,7 +26,7 @@ const HowItWorks = () => (
           <span className="mr-2 h-2 w-2 rounded-full bg-teal-400"></span>
           How it works
         </div>
-        <h2 className="text-3xl font-bold">
+        <h2 className="text-2xl font-bold sm:text-3xl">
           From demo to running software
         </h2>
       </div>
@@ -40,7 +40,7 @@ const HowItWorks = () => (
             <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-teal-500 font-bold text-slate-950">
               {index + 1}
             </div>
-            <h3 className="text-xl font-bold">{step.title}</h3>
+            <h3 className="text-lg font-bold sm:text-xl">{step.title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-gray-300">
               {step.description}
             </p>

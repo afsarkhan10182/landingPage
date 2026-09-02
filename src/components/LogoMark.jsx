@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const sizes = {
   sm: "h-8 w-8 rounded-lg",
-  lg: "h-20 w-20 rounded-2xl",
+  lg: "h-20 w-20 rounded-xl",
 };
 
 const LogoMark = ({ size = "sm" }) => (

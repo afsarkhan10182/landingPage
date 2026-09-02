@@ -1,3 +1,6 @@
+import restaurantImage from "../assets/restaurant.png";
+import schoolErpImage from "../assets/school-erp.png";
+
 export const liveProducts = [
   {
     id: "school",
@@ -6,6 +9,7 @@ export const liveProducts = [
     url: "https://school.digitalfuzed.com",
     group: "education-health",
     description: "Attendance, fees, report cards, and a parent portal.",
+    image: schoolErpImage,
     icon: "GraduationCap",
     accent: "bg-blue-500",
     iconWrap: "bg-blue-100 text-blue-700",
@@ -42,6 +46,7 @@ export const liveProducts = [
     url: "https://restaurant.digitalfuzed.com/login",
     group: "property-hospitality",
     description: "POS, KOT, tables, inventory, and reports.",
+    image: restaurantImage,
     icon: "UtensilsCrossed",
     accent: "bg-emerald-500",
     iconWrap: "bg-emerald-100 text-emerald-800",

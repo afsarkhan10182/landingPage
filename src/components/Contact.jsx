@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { liveProducts } from "../data/liveProducts";
 
 const Contact = () => {
   const phoneNumber = "918459148396";
@@ -52,40 +53,33 @@ Software Interested In: ${formData.software}`
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-white py-10 sm:py-12"
+      className="relative overflow-hidden bg-slate-50 py-10 sm:py-12"
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-80 h-80 bg-teal-500/5 rounded-full blur-3xl"></div>
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="mb-5 text-center">
-          <div className="mb-2 inline-flex items-center rounded-full border border-blue-500/20 bg-gradient-to-r from-blue-500/10 to-teal-500/10 px-3 py-1.5 text-sm font-medium">
+          <div className="mb-2 inline-flex items-center rounded-full border border-blue-500/20 bg-blue-50 px-3 py-1.5 text-sm font-medium">
             <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-400"></span>
             Request Free Demo
           </div>
-          <h2 className="mb-1 text-3xl font-bold text-gray-900">
+          <h2 className="mb-1 text-2xl font-bold text-gray-900 sm:text-3xl">
             Book a free software demo
           </h2>
-          <p className="mx-auto max-w-2xl text-sm text-gray-600">
-            Share the basics. We will show the software before you pay.
+          <p className="mx-auto max-w-2xl text-sm leading-relaxed text-gray-600">
+            Share the basics. Demo access is free; pricing depends on software, setup, and customization.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Contact Form */}
-          <div className="rounded-2xl border border-gray-100 bg-white p-5 shadow-xl sm:p-8">
+        <div className="grid gap-6 md:grid-cols-2 md:gap-12 items-start">
+          <div className="rounded-xl border border-gray-100 bg-white p-4 shadow-lg sm:p-8">
             <div className="mb-6">
-              <h3 className="mb-2 text-2xl font-bold text-gray-800">
+              <h3 className="mb-2 text-xl font-bold text-gray-800 sm:text-2xl">
                 Request Free Demo
               </h3>
               <p className="text-gray-600">
-                Name, phone, business type, and software interest are enough.
+                Name, phone, business type, and software interest are enough to share demo access.
               </p>
             </div>
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid gap-4 md:grid-cols-2 md:gap-6">
                 <div>
                   <label
                     htmlFor="name"
@@ -157,18 +151,17 @@ Software Interested In: ${formData.software}`
                   className="w-full min-h-12 rounded-lg border border-gray-300 px-4 py-3 text-base focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="">Select software</option>
-                  <option value="salon">Salon Management</option>
-                  <option value="restaurant">Restaurant POS</option>
-                  <option value="erp">Business ERP</option>
-                  <option value="school">School ERP</option>
-                  <option value="realestate">Real Estate CRM</option>
-                  <option value="crm">CRM</option>
+                  {liveProducts.map((product) => (
+                    <option key={product.id} value={product.name}>
+                      {product.name}
+                    </option>
+                  ))}
                   <option value="other">Other</option>
                 </select>
               </div>
               <button
                 type="submit"
-                className="w-full rounded-xl bg-[#38BDF8] px-6 py-4 font-extrabold text-[#0F172A] transition hover:bg-[#0F172A] hover:text-white"
+                className="w-full min-h-12 rounded-lg bg-[#38BDF8] px-6 py-3 font-extrabold text-[#0F172A] transition hover:bg-[#0F172A] hover:text-white"
               >
                 Request Demo
               </button>
@@ -180,15 +173,14 @@ Software Interested In: ${formData.software}`
             </form>
           </div>
 
-          {/* Contact Information */}
-          <div className="space-y-8 animate__animated animate__fadeInRight">
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 text-white p-8 rounded-2xl shadow-xl border border-slate-700">
-              <h3 className="text-2xl font-bold mb-6 text-[#38BDF8]">
+          <div className="space-y-6 sm:space-y-8">
+            <div className="rounded-xl border border-slate-700 bg-slate-900 p-5 text-white shadow-lg sm:p-8">
+              <h3 className="mb-6 text-xl font-bold text-[#38BDF8] sm:text-2xl">
                 Get in Touch
               </h3>
               <div className="space-y-6">
                 <div className="flex items-start group">
-                  <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-teal-500 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 bg-[#0369A1] rounded-lg flex items-center justify-center mr-4">
                     <svg
                       className="w-6 h-6 text-white"
                       fill="none"
@@ -210,7 +202,7 @@ Software Interested In: ${formData.software}`
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg mb-1">
+                    <h4 className="mb-1 text-base font-semibold sm:text-lg">
                       Visit Our Office
                     </h4>
                     <p className="text-gray-400">
@@ -221,7 +213,7 @@ Software Interested In: ${formData.software}`
                   </div>
                 </div>
                 <div className="flex items-start group">
-                  <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 bg-[#0369A1] rounded-lg flex items-center justify-center mr-4">
                     <svg
                       className="w-6 h-6 text-white"
                       fill="none"
@@ -237,17 +229,17 @@ Software Interested In: ${formData.software}`
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg mb-1">Email Us</h4>
+                    <h4 className="mb-1 text-base font-semibold sm:text-lg">Email Us</h4>
                     <a
                       href="mailto:sales@digitalfuzed.com"
-                      className="text-gray-400 hover:text-[#38BDF8]"
+                      className="break-all text-gray-400 hover:text-[#38BDF8]"
                     >
                       sales@digitalfuzed.com
                     </a>
                   </div>
                 </div>
                 <div className="flex items-start group">
-                  <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-xl flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 bg-[#0369A1] rounded-lg flex items-center justify-center mr-4">
                     <svg
                       className="w-6 h-6 text-white"
                       fill="none"
@@ -263,10 +255,10 @@ Software Interested In: ${formData.software}`
                     </svg>
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg mb-1">Call Us</h4>
+                    <h4 className="mb-1 text-base font-semibold sm:text-lg">Call Us</h4>
                     <a
                       href="tel:+918459148396"
-                      className="text-gray-400 hover:text-[#38BDF8]"
+                      className="break-all text-gray-400 hover:text-[#38BDF8]"
                     >
                       +91 8459148396
                     </a>
@@ -275,30 +267,30 @@ Software Interested In: ${formData.software}`
               </div>
             </div>
 
-            <div className="bg-[#0F172A] text-white p-8 rounded-2xl shadow-xl">
-              <h3 className="text-2xl font-bold mb-6">
+            <div className="rounded-xl bg-[#0F172A] p-5 text-white shadow-lg sm:p-8">
+              <h3 className="mb-6 text-xl font-bold sm:text-2xl">
                 Why Choose DigitalFuzed?
               </h3>
               <div className="space-y-4">
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
-                  <span className="text-lg">
+                  <span className="text-base sm:text-lg">
                     Cloud based and secure hosting
                   </span>
                 </div>
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
-                  <span className="text-lg">Setup and staff training included</span>
+                  <span className="text-base sm:text-lg">Setup and staff training included</span>
                 </div>
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
-                  <span className="text-lg">
+                  <span className="text-base sm:text-lg">
                     Maintenance and updates available
                   </span>
                 </div>
                 <div className="flex items-center">
                   <div className="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
-                  <span className="text-lg">
+                  <span className="text-base sm:text-lg">
                     WhatsApp support for quick help
                   </span>
                 </div>

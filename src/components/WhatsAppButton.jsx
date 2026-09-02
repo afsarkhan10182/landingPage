@@ -14,7 +14,7 @@ const WhatsAppButton = () => {
       aria-label="Chat with us on WhatsApp"
     >
       <div className="relative">
-        <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-green-500 to-green-600 shadow-lg transition hover:from-green-600 hover:to-green-700">
+        <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-green-600 shadow-lg transition hover:bg-green-700">
           <svg
             className="w-8 h-8 text-white"
             fill="currentColor"
