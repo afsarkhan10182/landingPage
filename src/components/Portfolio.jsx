@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   ArrowUpRight,
   Building2,
@@ -47,15 +47,24 @@ const products = productOrder.map((id) =>
 export default function Portfolio() {
   const [filter, setFilter] = useState("all");
   const [previewId, setPreviewId] = useState("crm");
+  const previewButtonRefs = useRef({});
   const visible = products.filter(
     (product) => filter === "all" || product.group === filter,
   );
   const preview = products.find((product) => product.id === previewId);
+  const selectPreview = (id) => {
+    previewButtonRefs.current[id]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+    setPreviewId(id);
+  };
   const movePreview = (direction) => {
     const currentIndex = products.findIndex((product) => product.id === previewId);
     const nextIndex =
       (currentIndex + direction + products.length) % products.length;
-    setPreviewId(products[nextIndex].id);
+    selectPreview(products[nextIndex].id);
   };
   return (
     <section id="portfolio" className="portfolio section-space">
@@ -162,8 +171,11 @@ export default function Portfolio() {
                 <button
                   key={product.id}
                   type="button"
+                  ref={(element) => {
+                    previewButtonRefs.current[product.id] = element;
+                  }}
                   aria-pressed={previewId === product.id}
-                  onClick={() => setPreviewId(product.id)}
+                  onClick={() => selectPreview(product.id)}
                 >
                   {product.name}
                 </button>

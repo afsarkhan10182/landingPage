@@ -1,7 +1,6 @@
 import { ArrowUpRight, Check } from "lucide-react";
 import { liveProducts } from "../data/liveProducts";
-// Photo: https://www.pexels.com/photo/office-team-looking-at-the-laptop-5466236/
-import teamImage from "../assets/team-workspace.webp";
+import heroImage from "../assets/team-workspace-crm-hero.webp";
 
 export default function Hero() {
   return (
@@ -9,8 +8,8 @@ export default function Hero() {
       <section id="hero" className="hero">
         <img
           className="hero-photo"
-          src={teamImage}
-          alt="Colleagues working together around a laptop"
+          src={heroImage}
+          alt="Business team reviewing a DigitalFuzed CRM dashboard"
           loading="eager"
         />
         <div className="hero-shade" />
