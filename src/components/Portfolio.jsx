@@ -1,5 +1,9 @@
+import { useState } from "react";
 import {
+  ArrowUpRight,
   Building2,
+  ChevronLeft,
+  ChevronRight,
   GraduationCap,
   HeartPulse,
   LayoutDashboard,
@@ -7,176 +11,217 @@ import {
   Scissors,
   Users,
   UtensilsCrossed,
+  KeyRound,
 } from "lucide-react";
-import PropTypes from "prop-types";
-import { productGroups, productsByGroup } from "../data/liveProducts";
+import { liveProducts, productGroups } from "../data/liveProducts";
 
-const ICONS = {
+const icons = {
+  Building2,
   GraduationCap,
   HeartPulse,
-  Building2,
-  UtensilsCrossed,
-  Scissors,
-  Users,
   LayoutDashboard,
   QrCode,
+  Scissors,
+  Users,
+  UtensilsCrossed,
 };
+const filterNames = {
+  "education-health": "Education & health",
+  "property-hospitality": "Property & hospitality",
+  "business-platforms": "Business tools",
+};
+const productOrder = [
+  "salon",
+  "school",
+  "realestate",
+  "crm",
+  "erp",
+  "restaurant",
+  "hospital",
+  "qrb",
+];
+const products = productOrder.map((id) =>
+  liveProducts.find((product) => product.id === id),
+);
 
-const ProductPreview = ({ product, Icon }) => {
-  if (product.image) {
-    return (
-      <img
-        src={product.image}
-        alt={product.name + " screenshot"}
-        className="h-full w-full object-cover object-top"
-      />
-    );
-  }
-
-  return (
-    <div className="flex h-full items-center justify-center bg-slate-900 p-6 text-center text-white">
-      <div>
-        <Icon className="mx-auto mb-3 h-10 w-10 text-[#38BDF8]" aria-hidden="true" />
-        <p className="text-lg font-extrabold">{product.name}</p>
-        <p className="mt-1 break-all font-mono text-xs text-slate-400">{product.host}</p>
-      </div>
-    </div>
+export default function Portfolio() {
+  const [filter, setFilter] = useState("all");
+  const [previewId, setPreviewId] = useState("crm");
+  const visible = products.filter(
+    (product) => filter === "all" || product.group === filter,
   );
-};
-
-ProductPreview.propTypes = {
-  product: PropTypes.shape({
-    host: PropTypes.string.isRequired,
-    image: PropTypes.string,
-    name: PropTypes.string.isRequired,
-  }).isRequired,
-  Icon: PropTypes.elementType.isRequired,
-};
-
-const ProductCard = ({ product }) => {
-  const Icon = ICONS[product.icon];
-
+  const preview = products.find((product) => product.id === previewId);
+  const movePreview = (direction) => {
+    const currentIndex = products.findIndex((product) => product.id === previewId);
+    const nextIndex =
+      (currentIndex + direction + products.length) % products.length;
+    setPreviewId(products[nextIndex].id);
+  };
   return (
-    <a
-      href={product.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={"group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg " + product.surface}
-    >
-      <div className="aspect-[16/9] border-b border-black/5 bg-white">
-        <ProductPreview product={product} Icon={Icon} />
-      </div>
-
-      <div className="flex flex-grow flex-col p-4">
-        <div className="mb-3 flex items-start justify-between gap-3">
-          <div
-            className={"flex h-11 w-11 items-center justify-center rounded-lg " + product.iconWrap}
-          >
-            <Icon className="h-5 w-5" aria-hidden="true" />
+    <section id="portfolio" className="portfolio section-space">
+      <div className="shell">
+        <div className="section-heading reveal">
+          <div>
+            <p className="eyebrow">01 / THE SOFTWARE COLLECTION</p>
+            <h2>
+              Your business.
+              <br />
+              <em>Your kind of software.</em>
+            </h2>
           </div>
-          <span
-            className={"inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-white " + product.accent}
-          >
-            Live
-          </span>
-        </div>
-
-        <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-700">
-          {product.name}
-        </h3>
-        <p className="mt-1 break-all font-mono text-xs text-gray-500">{product.host}</p>
-        <p className="mt-2 flex-grow text-sm leading-relaxed text-gray-600">
-          {product.description}
-        </p>
-
-        <span className="mt-3 inline-flex min-h-10 items-center justify-center rounded-lg bg-[#0F172A] px-3 text-sm font-semibold text-white group-hover:bg-[#0369A1]">
-          Open live demo
-          <svg
-            className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-            />
-          </svg>
-        </span>
-      </div>
-    </a>
-  );
-};
-
-ProductCard.propTypes = {
-  product: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    host: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
-    accent: PropTypes.string.isRequired,
-    iconWrap: PropTypes.string.isRequired,
-    image: PropTypes.string,
-    surface: PropTypes.string.isRequired,
-  }).isRequired,
-};
-
-const Portfolio = () => {
-  return (
-    <section id="portfolio" className="bg-slate-100 pb-10 pt-6 sm:pb-12 sm:pt-8">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-5 text-center">
-          <div className="mb-2 inline-flex items-center rounded-full border border-green-500/20 bg-emerald-50 px-3 py-1.5 text-sm font-medium">
-            <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-green-500"></span>
-            Live work
-          </div>
-          <h2 className="mb-1 text-2xl font-bold sm:text-3xl md:text-4xl">
-            See our products working before paying
-          </h2>
-          <p className="mx-auto max-w-2xl text-sm text-gray-600">
-            Open a live demo. If login is required, ask for access on WhatsApp.
+          <p>
+            From the first appointment to the last invoice.
+            <br className="desktop-break" /> Find a better way to run your day.
           </p>
         </div>
-
-        <div className="space-y-8">
-          {productGroups.map((group) => (
-            <div key={group.id}>
-              <div className="mb-3 flex flex-col gap-0.5 sm:flex-row sm:items-end sm:justify-between">
+        <p className="demo-note">
+          <KeyRound size={20} aria-hidden="true" />
+          <span>
+            <strong>Ready to explore?</strong> Working demo access is available
+            for every product. Open one and try it yourself.
+          </span>
+        </p>
+        <div className="filter-bar">
+          <div
+            className="product-filters"
+            role="group"
+            aria-label="Filter software by industry"
+          >
+            <button
+              type="button"
+              aria-pressed={filter === "all"}
+              onClick={() => setFilter("all")}
+            >
+              All software <span>{products.length}</span>
+            </button>
+            {productGroups.map((group) => (
+              <button
+                type="button"
+                key={group.id}
+                aria-pressed={filter === group.id}
+                onClick={() => setFilter(group.id)}
+              >
+                {filterNames[group.id]}
+              </button>
+            ))}
+          </div>
+          <span className="results-count" role="status">
+            {visible.length} products
+          </span>
+        </div>
+        <div className="product-directory">
+          {visible.map((product) => {
+            const Icon = icons[product.icon];
+            return (
+              <a
+                key={product.id}
+                href={product.url}
+                className={`product-entry product-${product.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="product-icon">
+                  <Icon size={26} strokeWidth={1.5} />
+                </span>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 sm:text-xl">
-                    {group.title}
-                  </h3>
-                  <p className="text-sm text-gray-500">{group.description}</p>
+                  <span className="product-category">
+                    {product.id === "qrb"
+                      ? "Digital presence"
+                      : product.id === "crm" || product.id === "erp"
+                        ? "Business essentials"
+                        : "Industry software"}
+                  </span>
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <span className="product-demo">
+                    Open live demo <ArrowUpRight size={14} />
+                  </span>
                 </div>
-                <p className="text-xs font-medium uppercase tracking-wide text-gray-400">
-                  {productsByGroup(group.id).length} products
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                {productsByGroup(group.id).map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
+                <ArrowUpRight className="product-arrow" size={22} />
+              </a>
+            );
+          })}
+        </div>
+      </div>
+      <div className="product-spotlight">
+        <div className="shell spotlight-inner">
+          <div className="spotlight-copy reveal">
+            <p className="eyebrow">A LOOK INSIDE</p>
+            <h2>
+              Less guessing.
+              <br />
+              <em>More clarity.</em>
+            </h2>
+            <p>{preview.description}</p>
+            <div
+              className="preview-switch"
+              role="group"
+              aria-label="Choose product preview"
+            >
+              {products.map((product) => (
+                <button
+                  key={product.id}
+                  type="button"
+                  aria-pressed={previewId === product.id}
+                  onClick={() => setPreviewId(product.id)}
+                >
+                  {product.name}
+                </button>
+              ))}
+            </div>
+            <a
+              className="text-link"
+              href={preview.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Explore {preview.name} <ArrowUpRight size={18} />
+            </a>
+          </div>
+          <figure className="product-screenshot reveal">
+            <div className="screenshot-label">
+              <span>
+                <span className="status-dot" /> {preview.name}
+              </span>
+              <div className="preview-navigation">
+                <button
+                  type="button"
+                  className="preview-arrow"
+                  aria-label="Previous product preview"
+                  title="Previous product preview"
+                  onClick={() => movePreview(-1)}
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <button
+                  type="button"
+                  className="preview-arrow"
+                  aria-label="Next product preview"
+                  title="Next product preview"
+                  onClick={() => movePreview(1)}
+                >
+                  <ChevronRight size={18} />
+                </button>
+                <a
+                  href={preview.image}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Enlarge ${preview.name} screenshot`}
+                >
+                  View full size <ArrowUpRight size={14} />
+                </a>
               </div>
             </div>
-          ))}
-        </div>
-
-        <div className="mt-8 text-center">
-          <a
-            href="#contact"
-            className="inline-flex min-h-12 items-center justify-center rounded-md bg-[#38BDF8] px-6 py-3 text-center font-extrabold text-[#0F172A] transition duration-300 hover:bg-[#0F172A] hover:text-white sm:px-8"
-          >
-            Ask for Demo Access
-          </a>
+            <img
+              key={preview.id}
+              src={preview.image}
+              alt={preview.imageAlt}
+              loading="lazy"
+            />
+            <figcaption>Actual product screen. Sample data shown.</figcaption>
+          </figure>
         </div>
       </div>
     </section>
   );
-};
-
-export default Portfolio;
+}

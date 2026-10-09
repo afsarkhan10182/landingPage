@@ -1,174 +1,89 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import LogoMark from "./LogoMark";
 
-const navLinks = [
-  { href: "#hero", label: "Home" },
-  { href: "#services", label: "Solutions" },
-  { href: "#portfolio", label: "Live Demos" },
-  { href: "#how-it-works", label: "How It Works" },
+const links = [
+  ["#portfolio", "Explore software"],
+  ["#services", "Why DigitalFuzed"],
+  ["#how-it-works", "How it works"],
 ];
 
-const Header = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeId, setActiveId] = useState("#hero");
-
-  const scrollToSection = (e) => {
-    e.preventDefault();
-    const targetId = e.currentTarget.getAttribute("href");
-    const targetElement = document.querySelector(targetId);
-
-    if (targetElement) {
-      setActiveId(targetId);
-      targetElement.scrollIntoView({ behavior: "smooth", block: "start" });
-      setMobileMenuOpen(false);
-    }
-  };
-
+export default function Header() {
+  const [open, setOpen] = useState(false);
+  const toggle = useRef(null);
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileMenuOpen]);
-
-  useEffect(() => {
-    const onKey = (event) => {
-      if (event.key === "Escape") setMobileMenuOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
-
-  useEffect(() => {
-    const ids = [...navLinks.map((link) => link.href.slice(1)), "contact"];
-
-    const updateActive = () => {
-      const offset = 88;
-      let current = ids[0];
-
-      for (const id of ids) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        if (el.getBoundingClientRect().top - offset <= 0) current = id;
+    const close = (event) => {
+      if (event.key === "Escape" && open) {
+        setOpen(false);
+        toggle.current?.focus();
       }
-
-      const atBottom =
-        window.innerHeight + window.scrollY >=
-        document.documentElement.scrollHeight - 8;
-      if (atBottom) current = ids[ids.length - 1];
-
-      setActiveId(`#${current}`);
     };
-
-    updateActive();
-    window.addEventListener("scroll", updateActive, { passive: true });
-    window.addEventListener("resize", updateActive);
-    return () => {
-      window.removeEventListener("scroll", updateActive);
-      window.removeEventListener("resize", updateActive);
-    };
-  }, []);
-
-  const linkClass = (href, extra = "") =>
-    `rounded-md px-3 py-2.5 text-sm font-semibold transition ${extra} ${
-      activeId === href
-        ? "bg-white/15 text-white"
-        : "text-white/80 hover:bg-white/10 hover:text-white"
-    }`;
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [open]);
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#0F172A]/95 text-white backdrop-blur-xl">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <a
-            href="#hero"
-            onClick={scrollToSection}
-            className="flex items-center space-x-2"
-            aria-label="DigitalFuzed home"
-          >
-            <LogoMark />
-            <span className="text-xl font-extrabold text-white">
-              Digital<span className="text-[#38BDF8]">Fuzed</span>
-            </span>
-          </a>
-
-          <div className="hidden items-center gap-1 lg:flex">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={scrollToSection}
-                aria-current={activeId === link.href ? "page" : undefined}
-                className={linkClass(link.href)}
-              >
-                {link.label}
-              </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={scrollToSection}
-              aria-current={activeId === "#contact" ? "page" : undefined}
-              className={`ml-2 rounded-md px-4 py-2.5 text-sm font-medium ${
-                activeId === "#contact"
-                  ? "bg-[#38BDF8] text-[#0F172A] ring-2 ring-white/30"
-                  : "bg-[#0369A1] hover:bg-[#38BDF8] hover:text-[#0F172A]"
-              }`}
-            >
-              Request Free Demo
-            </a>
-          </div>
-
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen((open) => !open)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-md hover:bg-white/10 lg:hidden"
-            aria-expanded={mobileMenuOpen}
-            aria-controls="mobile-nav"
-            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-          >
-            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              {mobileMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {mobileMenuOpen && (
-        <div
-          id="mobile-nav"
-          className="border-t border-white/10 bg-slate-950 lg:hidden"
+    <header className="site-header">
+      <div className="shell header-inner">
+        <a
+          href="#hero"
+          className="brand"
+          aria-label="DigitalFuzed home"
+          onClick={() => setOpen(false)}
         >
-          <div className="space-y-1 px-4 py-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={scrollToSection}
-                className={linkClass(link.href, "block text-base")}
-              >
-                {link.label}
-              </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={scrollToSection}
-              className={`mt-2 block rounded-md px-4 py-3 text-center text-base font-medium ${
-                activeId === "#contact"
-                  ? "bg-[#38BDF8] text-[#0F172A] ring-2 ring-white/30"
-                  : "bg-[#0369A1] hover:bg-[#38BDF8] hover:text-[#0F172A]"
-              }`}
-            >
-              Request Free Demo
+          <LogoMark />
+        </a>
+        <nav className="desktop-nav" aria-label="Main navigation">
+          {links.map(([href, label]) => (
+            <a key={href} href={href}>
+              {label}
             </a>
-          </div>
-        </div>
+          ))}
+        </nav>
+        <a href="#portfolio" className="button button-dark header-cta">
+          Open live demos <ArrowRight size={17} />
+        </a>
+        <button
+          ref={toggle}
+          className="icon-button menu-toggle"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+          onClick={() => setOpen(!open)}
+        >
+          {open ? <X /> : <Menu />}
+        </button>
+      </div>
+      {open && (
+        <nav
+          id="mobile-nav"
+          className="mobile-nav"
+          aria-label="Mobile navigation"
+        >
+          {links.map(([href, label]) => (
+            <a key={href} href={href} onClick={() => setOpen(false)}>
+              {label}
+              <ArrowRight size={18} aria-hidden="true" />
+            </a>
+          ))}
+          <a
+            href="#portfolio"
+            className="mobile-nav-cta"
+            onClick={() => setOpen(false)}
+          >
+            Open live demos
+            <ArrowRight size={18} aria-hidden="true" />
+          </a>
+          <a
+            href="#contact"
+            className="mobile-nav-contact"
+            onClick={() => setOpen(false)}
+          >
+            Get in touch
+            <ArrowRight size={18} aria-hidden="true" />
+          </a>
+        </nav>
       )}
-    </nav>
+    </header>
   );
-};
-
-export default Header;
+}

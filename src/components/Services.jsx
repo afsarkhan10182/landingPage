@@ -1,103 +1,79 @@
-import { Check, Cloud, Headphones, Settings, ShieldCheck } from "lucide-react";
+import {
+  ArrowUpRight,
+  Cloud,
+  Headphones,
+  SlidersHorizontal,
+  Users,
+} from "lucide-react";
 
 const services = [
   {
-    name: "Cloud setup",
-    description: "Hosting, domain, SSL, and first configuration handled.",
     icon: Cloud,
+    title: "We get you set up.",
+    description:
+      "Hosting, domain, configuration. We handle the technical details so you can get to work.",
   },
   {
-    name: "Staff training",
-    description: "Your team learns the daily flow before going live.",
-    icon: Settings,
+    icon: Users,
+    title: "Your team gets confident.",
+    description:
+      "Practical training around the tasks your people do every day, before you go live.",
   },
   {
-    name: "Support",
-    description: "WhatsApp help for fixes, questions, and small changes.",
+    icon: SlidersHorizontal,
+    title: "It fits the way you work.",
+    description:
+      "Need a different workflow? We work through the changes your business actually needs.",
+  },
+  {
     icon: Headphones,
-  },
-  {
-    name: "Secure updates",
-    description: "Maintenance and updates available after launch.",
-    icon: ShieldCheck,
+    title: "People you can reach.",
+    description:
+      "A question, a fix, a next step. Get help from our team on WhatsApp after launch.",
   },
 ];
 
-const benefits = [
-  "Cloud based",
-  "Setup & configuration",
-  "Staff training",
-  "Maintenance & updates",
-  "Secure hosting",
-  "Customization available",
-  "WhatsApp support",
-  "Live demo before paying",
-];
-
-const Services = () => {
+export default function Services() {
   return (
-    <section
-      id="services"
-      className="relative overflow-hidden bg-slate-50 pb-6 pt-10 sm:pb-8 sm:pt-12"
-    >
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-5 text-center">
-          <div className="mb-2 inline-flex items-center rounded-full border border-blue-500/20 bg-blue-50 px-3 py-1.5 text-sm font-medium">
-            <span className="mr-2 h-2 w-2 animate-pulse rounded-full bg-blue-500"></span>
-            Setup & support
+    <section id="services" className="services section-space">
+      <div className="shell">
+        <div className="section-heading reveal">
+          <div>
+            <p className="eyebrow">02 / THE DIGITALFUZED DIFFERENCE</p>
+            <h2>
+              Good software.
+              <br />
+              <em>Even better company.</em>
+            </h2>
           </div>
-          <h2 className="mb-1 text-2xl font-bold text-gray-900 sm:text-3xl">
-            We help you run the software, not just open it
-          </h2>
-          <p className="mx-auto max-w-2xl text-sm text-gray-600">
-            Start with a live demo, then we help with setup, configuration, and
-            training.
+          <p>
+            Choosing software is one thing.
+            <br />
+            Getting it working for your people is where we come in.
           </p>
         </div>
-
-        <div className="mb-6 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service) => {
-            const Icon = service.icon;
-            return (
-              <div
-                key={service.name}
-                className="rounded-xl border border-gray-100 bg-white p-5 shadow-lg"
-              >
-                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-slate-900 text-[#38BDF8]">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
-                </div>
-                <h3 className="text-lg font-bold text-gray-900">{service.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-gray-600">
-                  {service.description}
-                </p>
+        <div className="service-grid">
+          {services.map(({ icon: Icon, title, description }, index) => (
+            <article className="service-item reveal" key={title}>
+              <div className="service-top">
+                <Icon size={26} strokeWidth={1.5} />
+                <span>0{index + 1}</span>
               </div>
-            );
-          })}
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </article>
+          ))}
         </div>
-
-        <div className="rounded-xl bg-slate-900 px-5 py-6 text-center text-white sm:px-8">
-          <h3 className="text-xl font-bold sm:text-2xl">Why DigitalFuzed</h3>
-          <p className="mt-1 text-sm text-gray-300">
-            Software is only useful when your team can actually run it.
+        <div className="custom-line">
+          <p>
+            Something a little different in mind?{" "}
+            <span>We build custom solutions, too.</span>
           </p>
-          <div className="mt-5 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
-            {benefits.map((service) => (
-              <div key={service} className="flex items-center justify-center gap-2">
-                <Check className="h-4 w-4 flex-shrink-0 text-[#38BDF8]" aria-hidden="true" />
-                <h4 className="text-sm font-semibold text-[#38BDF8]">{service}</h4>
-              </div>
-            ))}
-          </div>
-          <a
-            href="#contact"
-            className="mt-5 inline-flex min-h-12 items-center justify-center rounded-lg bg-[#38BDF8] px-6 py-3 text-center font-extrabold text-[#0F172A] transition hover:bg-white sm:px-7"
-          >
-            Request Free Demo
+          <a href="#contact" className="text-link">
+            Tell us about it <ArrowUpRight size={19} />
           </a>
         </div>
       </div>
     </section>
   );
-};
-
-export default Services;
+}

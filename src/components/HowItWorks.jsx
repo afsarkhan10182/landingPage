@@ -1,54 +1,45 @@
+import { ArrowDownRight } from "lucide-react";
+
 const steps = [
-  {
-    title: "Choose software",
-    description:
-      "Pick Salon Management, Restaurant POS, ERP, School ERP, CRM, or Real Estate CRM.",
-  },
-  {
-    title: "See live demo",
-    description: "Check the working software before paying or committing.",
-  },
-  {
-    title: "We set it up",
-    description:
-      "We handle configuration, training, secure hosting, updates, and support.",
-  },
+  [
+    "Choose your software.",
+    "Pick the product that matches how your business works.",
+  ],
+  [
+    "Open the demo.",
+    "Use the provided demo access to explore the workflow at your own pace.",
+  ],
+  [
+    "Set up with confidence.",
+    "Agree on scope and pricing, then we configure the software and train your team.",
+  ],
 ];
 
-const HowItWorks = () => (
-  <section
-    id="how-it-works"
-    className="bg-slate-900 py-10 text-white sm:py-12"
-  >
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div className="mb-6 text-center">
-        <div className="mb-2 inline-flex items-center rounded-full border border-teal-400/30 bg-white/10 px-3 py-1.5 text-sm font-medium">
-          <span className="mr-2 h-2 w-2 rounded-full bg-teal-400"></span>
-          How it works
+export default function HowItWorks() {
+  return (
+    <section id="how-it-works" className="process section-space">
+      <div className="shell process-inner">
+        <div className="reveal">
+          <p className="eyebrow">03 / GET STARTED</p>
+          <h2>
+            A clear way
+            <br />
+            <em>to start.</em>
+          </h2>
+          <ArrowDownRight className="process-arrow" size={76} strokeWidth={1} />
         </div>
-        <h2 className="text-2xl font-bold sm:text-3xl">
-          From demo to running software
-        </h2>
+        <ol className="process-list">
+          {steps.map(([title, description], index) => (
+            <li key={title} className="reveal">
+              <span className="step-number">0{index + 1}</span>
+              <div>
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
-
-      <div className="grid gap-4 md:grid-cols-3">
-        {steps.map((step, index) => (
-          <div
-            key={step.title}
-            className="rounded-xl border border-white/10 bg-white/5 p-5"
-          >
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-teal-500 font-bold text-slate-950">
-              {index + 1}
-            </div>
-            <h3 className="text-lg font-bold sm:text-xl">{step.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-gray-300">
-              {step.description}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
-
-export default HowItWorks;
+    </section>
+  );
+}
