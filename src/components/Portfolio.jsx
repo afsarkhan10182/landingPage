@@ -46,7 +46,7 @@ const products = productOrder.map((id) =>
 
 export default function Portfolio() {
   const [filter, setFilter] = useState("all");
-  const [previewId, setPreviewId] = useState("crm");
+  const [previewId, setPreviewId] = useState(productOrder[0]);
   const previewButtonRefs = useRef({});
   const visible = products.filter(
     (product) => filter === "all" || product.group === filter,
@@ -56,7 +56,7 @@ export default function Portfolio() {
     previewButtonRefs.current[id]?.scrollIntoView({
       behavior: "smooth",
       block: "nearest",
-      inline: "center",
+      inline: "nearest",
     });
     setPreviewId(id);
   };

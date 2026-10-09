@@ -60,7 +60,7 @@ export default function Header() {
         </nav>
         <div className="header-actions">
           <button
-            className="icon-button theme-toggle"
+            className="icon-button theme-toggle desktop-theme-toggle"
             type="button"
             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
             aria-pressed={theme === "dark"}
@@ -116,6 +116,23 @@ export default function Header() {
             Get in touch
             <ArrowRight size={18} aria-hidden="true" />
           </a>
+          <button
+            className="mobile-theme-toggle"
+            type="button"
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            aria-pressed={theme === "dark"}
+            onClick={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
+          >
+            <span>
+              {theme === "dark" ? (
+                <Sun size={19} aria-hidden="true" />
+              ) : (
+                <Moon size={19} aria-hidden="true" />
+              )}
+              {theme === "dark" ? "Light mode" : "Dark mode"}
+            </span>
+            <ArrowRight size={18} aria-hidden="true" />
+          </button>
         </nav>
       )}
     </header>
