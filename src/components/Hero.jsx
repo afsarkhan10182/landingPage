@@ -1,5 +1,4 @@
 import { ArrowUpRight, Check } from "lucide-react";
-import { liveProducts } from "../data/liveProducts";
 import heroImage from "../assets/team-workspace-crm-hero.webp";
 
 export default function Hero() {
@@ -43,25 +42,6 @@ export default function Hero() {
           </div>
         </div>
       </section>
-      <div className="industry-strip" aria-label="Industries we work with">
-        <div className="shell industry-inner">
-          <span>Made for your everyday.</span>
-          <div>
-            {[
-              "Salons",
-              "Schools",
-              "Real estate",
-              "Restaurants",
-              "Growing teams",
-            ].map((name) => (
-              <span key={name}>{name}</span>
-            ))}
-          </div>
-          <small>
-            {String(liveProducts.length).padStart(2, "0")} live products
-          </small>
-        </div>
-      </div>
     </>
   );
 }

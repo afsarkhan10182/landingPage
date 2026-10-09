@@ -187,6 +187,20 @@ export default function Portfolio() {
                 </button>
               ))}
             </div>
+            <label className="preview-select-label">
+              <select
+                className="preview-select"
+                aria-label="Choose product preview"
+                value={previewId}
+                onChange={(event) => selectPreview(event.target.value)}
+              >
+                {products.map((product) => (
+                  <option key={product.id} value={product.id}>
+                    {product.name}
+                  </option>
+                ))}
+              </select>
+            </label>
             <a
               className="text-link"
               href={preview.url}

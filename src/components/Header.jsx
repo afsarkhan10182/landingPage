@@ -78,6 +78,20 @@ export default function Header() {
           </a>
         </div>
         <button
+          className="icon-button mobile-theme-toggle"
+          type="button"
+          aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          aria-pressed={theme === "dark"}
+          title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          onClick={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
+        >
+          {theme === "dark" ? (
+            <Sun size={19} aria-hidden="true" />
+          ) : (
+            <Moon size={19} aria-hidden="true" />
+          )}
+        </button>
+        <button
           ref={toggle}
           className="icon-button menu-toggle"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -116,23 +130,6 @@ export default function Header() {
             Get in touch
             <ArrowRight size={18} aria-hidden="true" />
           </a>
-          <button
-            className="mobile-theme-toggle"
-            type="button"
-            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            aria-pressed={theme === "dark"}
-            onClick={() => setTheme((current) => (current === "dark" ? "light" : "dark"))}
-          >
-            <span>
-              {theme === "dark" ? (
-                <Sun size={19} aria-hidden="true" />
-              ) : (
-                <Moon size={19} aria-hidden="true" />
-              )}
-              {theme === "dark" ? "Light mode" : "Dark mode"}
-            </span>
-            <ArrowRight size={18} aria-hidden="true" />
-          </button>
         </nav>
       )}
     </header>
