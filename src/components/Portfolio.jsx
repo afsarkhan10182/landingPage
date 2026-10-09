@@ -53,11 +53,17 @@ export default function Portfolio() {
   );
   const preview = products.find((product) => product.id === previewId);
   const selectPreview = (id) => {
-    previewButtonRefs.current[id]?.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "nearest",
-    });
+    const button = previewButtonRefs.current[id];
+    const rail = button?.parentElement;
+    if (id === products[0].id) {
+      rail?.scrollTo({ left: 0, behavior: "smooth" });
+    } else {
+      button?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
+      });
+    }
     setPreviewId(id);
   };
   const movePreview = (direction) => {
